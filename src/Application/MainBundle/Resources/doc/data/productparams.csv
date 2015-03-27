@@ -1,0 +1,15 @@
+typ;nazwa;wymagany;opis
+wszystkie;name;?;Nazwa produktu, może mieć różne znaczenie w zależności od kontekstu
+wszystkie;code;?;Kod produktu
+wszystkie;type;?;Typ produktu
+wszystkie;description;?;Opis produktu
+wszystkie;booking_number;?;Numer rezerwacji określony w źródle danych
+wszystkie;starts_at;?;Czas od którego dany produkt/usługa zaczynają być dostępne dla klienta
+wszystkie;ends_at;?;Czas gdy dany produkt/usługa kończy być dostępny dla klienta
+wszystkie;country;?;Nazwa państwa
+wszystkie;country_code;?;Kod państwa
+wszystkie;currency;?;Kod waluty np. PLN, USD
+transport;departure;?;Miejsce skąd zaczyna się transport
+transport;destination;?;Miejsce docelowe transportu
+accommodation;room;?;Typ akomodacji, np. typ pokoju, apartament itp.
+accommodation;catering;?;Typ wyżywienia, np. "all inclusive", można skorzystać z międzynarodowych terminów hotelowych http://www.zsz4.chelm.pl/dokumenty/dokang/TERMINY_HOTEL.pdf

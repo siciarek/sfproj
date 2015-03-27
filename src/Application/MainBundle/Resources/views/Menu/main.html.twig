@@ -1,0 +1,104 @@
+<nav class="navbar navbar-inverse">
+    <div class="container">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">
+                    {{ 'Toggle navigation'|trans }}
+                </span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('default.home') }}">
+                <i class="fa fa-cog"></i>
+                <strong>{{ app_name }}</strong>
+            </a>
+        </div>
+
+        <div id="navbar" class="collapse navbar-collapse">
+            
+            <ul class="nav navbar-nav">
+                {% for m in menu %}
+                    {% if m.children is defined %}
+                        {% set liclass = [ 'dropdown' ] %}
+                        {% set active = null %}
+
+                        {% for c in m.children if c.route is defined and c.route == route %}
+                            {% set active = c %}
+                        {% endfor %}
+
+                        {% if active != null %}
+                            {% set liclass = liclass|merge([ 'active' ]) %}
+                        {% endif %}
+
+                        {% set disabled = m.children|length == 0 %}
+
+                        {% if disabled == true %}
+                            <li class="disabled">
+                                <a href="#">
+                                    <i class="fa fa-{{m.icon}} fa-lg fa-fw"></i>
+                                    {{ m.text|trans }}                           
+                                </a>
+                            </li> 
+                        {% else %}
+                            <li class="{{ liclass|join(' ') }}">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <i class="fa fa-{{m.icon}} fa-lg fa-fw"></i>
+                                    {{ m.text|trans }}                           
+                                    <span class="caret"></span>
+                                </a>
+                                {% if disabled == false %}
+                                    <ul class="dropdown-menu" role="menu">
+                                        {% for c in m.children %}
+                                            {% if c == null %}
+
+                                                <li class="divider"></li>
+
+                                            {% else %}
+
+                                                <li>
+                                                    <a href="{{ path(c.route, c.routeParams is defined ? c.routeParams : []) }}">
+                                                        <i class="fa {% if c == active %}fa-check {% endif %}fa-fw"></i>
+                                                        {{ c.text|trans }}
+                                                    </a>
+                                                </li>     
+
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </li>                            
+                        {% endif %}
+
+                    {% else %}
+                        {% set active = m.route == route %}
+                        <li{% if active == true %} class="active"{% endif %}>
+                            <a href="{{ path(m.route, m.routeParams is defined ? m.routeParams : []) }}">
+                                <i class="fa fa-{{m.icon}} fa-lg fa-fw"></i>
+                                {{ m.text|trans }}                           
+                            </a>
+                        </li>     
+                    {% endif %}
+                {% endfor %}               
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    {% if true %}
+                        <a href="#">
+                            <i class="fa fa-unlock-alt fa-lg fa-fw"></i>
+                            {{ 'user.signin'|trans }}                           
+                        </a>
+                    {% else %}
+                        <a href="#">
+                            <i class="fa fa-lock fa-lg fa-fw"></i>
+                            {{ 'user.signout'|trans }}                           
+                        </a>
+                    {% endif %}
+                </li>
+            </ul>
+
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>

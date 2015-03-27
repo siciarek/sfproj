@@ -1,0 +1,24 @@
+menu:
+    -
+        text: menu.home
+        icon: home
+        route: default.home
+    -
+        text: menu.contact
+        icon: envelope
+        route: default.contact
+    -
+        text: menu.info
+        icon: info-circle
+        children:
+            -
+                text: menu.about
+                route: info.about
+            -
+                text: menu.authors
+                route: info.authors
+            -
+                ~
+            -
+                text: menu.help
+                route: info.help

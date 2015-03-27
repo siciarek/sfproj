@@ -1,0 +1,21 @@
+user:
+    signin: Zaloguj się
+    signout: Wyloguj się
+
+common:
+    home: Strona główna
+    info: Info
+    contact: Kontakt
+    authors: Autorzy
+    about: O aplikacji
+    help: Pomoc
+    find_out_more: Dowiedz się więcej
+
+menu:
+    home: Strona gł.
+    info: Info
+    contact: Kontakt
+    authors: Autorzy
+    about: O aplikacji…
+    help: Pomoc
+    

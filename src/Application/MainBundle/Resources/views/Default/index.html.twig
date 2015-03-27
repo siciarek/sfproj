@@ -1,0 +1,29 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1>
+            {{ 'common.home'|trans }}
+        </h1>
+        
+        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor mollis felis.</p>
+        <p>Praesent pretium, neque vitae viverra efficitur, urna tortor vehicula diam, quis tincidunt lectus lacus ullamcorper ante.</p>
+        <p>Quisque pulvinar, orci nec tempor bibendum, leo elit faucibus libero, id maximus nisi enim nec turpis.</p>
+        
+        <hr/>
+        
+        <a class="btn btn-info btn-lg pull-left" href="{{ path('info.about') }}">
+            <i class="fa fa-unlock-alt fa-fw fa-lg"></i>
+            {{ 'user.signin'|trans }}
+        </a>
+                                
+        <a class="btn btn-success btn-lg pull-right" href="{{ path('info.about') }}">
+            {{ 'common.find_out_more'|trans }}
+            <i class="fa fa-arrow-circle-right fa-fw fa-lg"></i>
+        </a>
+       
+        <div class="clearfix"></div>
+    </div>
+
+{% endblock %}
+

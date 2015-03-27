@@ -1,2 +1,28 @@
 sonata_admin:
     title: Admin
+    
+    dashboard:
+        groups:
+            
+            sonata.user:
+                label: users
+                label_catalogue: SonataUserBundle
+                items:
+                   - sonata.user.admin.user
+                   - sonata.user.admin.group
+                   
+            sonata.media:
+                label: media
+                label_catalogue: SonataMediaBundle
+                items:
+                    - sonata.media.admin.gallery                                                                   
+                    - sonata.media.admin.media 
+        
+        blocks:
+            -
+                position: left
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups:
+                        - sonata.user
+                        - sonata.media

@@ -9,6 +9,7 @@
         }
     },
     "require": {
+        "knplabs/doctrine-behaviors": "dev-master",
         "friendsofsymfony/jsrouting-bundle": "dev-master",
         
         "sonata-project/admin-bundle": "~2.4@dev",

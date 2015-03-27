@@ -12,7 +12,7 @@ sonata_admin:
                    - sonata.user.admin.group
                 item_adds:            []
                 roles:
-                    - ROLE_ADMIN
+                    - ROLE_SUPER_ADMIN
                    
             sonata.media:
                 label: media
@@ -21,7 +21,7 @@ sonata_admin:
                     - sonata.media.admin.media 
                     - sonata.media.admin.gallery                                                                   
                 roles:
-                    - ROLE_USER
+                    - ROLE_ADMIN
         
             sonata.classification:
                 label: sonata_classification
@@ -36,7 +36,7 @@ sonata_admin:
                 item_adds: [] # 
                     
                 roles:
-                    - ROLE_USER
+                    - ROLE_ADMIN
                    
         blocks:
             -
@@ -44,9 +44,10 @@ sonata_admin:
                 type: sonata.admin.block.admin_list
                 settings:
                     groups:
-                        - sonata.user
                         - sonata.media
-#            -
-#                position: right
-#                type: sonata.admin.block.admin_list
-#                settings: ~
+            -
+                position: right
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups:
+                        - sonata.user

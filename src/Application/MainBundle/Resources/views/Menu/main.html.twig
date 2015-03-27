@@ -81,19 +81,20 @@
                         </li>     
                     {% endif %}
                 {% endfor %}               
+                
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    {% if true %}
-                        <a href="#">
-                            <i class="fa fa-unlock-alt fa-lg fa-fw"></i>
-                            {{ 'user.signin'|trans }}                           
-                        </a>
-                    {% else %}
-                        <a href="#">
+                    {% if is_granted('ROLE_USER') %}
+                        <a href="{{ path('fos_user_security_logout') }}">
                             <i class="fa fa-lock fa-lg fa-fw"></i>
                             {{ 'user.signout'|trans }}                           
+                        </a>
+                    {% else %}
+                        <a href="{{ path('fos_user_security_login') }}">
+                            <i class="fa fa-unlock-alt fa-lg fa-fw"></i>
+                            {{ 'user.signin'|trans }}                           
                         </a>
                     {% endif %}
                 </li>

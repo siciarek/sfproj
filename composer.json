@@ -9,9 +9,14 @@
         }
     },
     "require": {
+        
+        "liuggio/excelbundle": "dev-master",
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "doctrine/doctrine-migrations-bundle": "dev-master",
         "knplabs/doctrine-behaviors": "dev-master",
         "friendsofsymfony/jsrouting-bundle": "dev-master",
         
+        "doctrine/migrations": "~1.0@dev",
         "sonata-project/admin-bundle": "~2.4@dev",
         "sonata-project/datagrid-bundle": "~2.2@dev",
         "sonata-project/classification-bundle": "dev-master",

@@ -9,6 +9,8 @@
         }
     },
     "require": {
+        "friendsofsymfony/jsrouting-bundle": "dev-master",
+        
         "sonata-project/admin-bundle": "~2.4@dev",
         "sonata-project/datagrid-bundle": "~2.2@dev",
         "sonata-project/classification-bundle": "dev-master",

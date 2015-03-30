@@ -1,3 +1,32 @@
 nav.navbar.navbar-inverse {
     border-radius: 0;
 }
+
+form label {
+    font-weight: normal;
+}
+
+form input[type=checkbox] {
+/* Double-sized Checkboxes */
+  -ms-transform: scale(1.5); /* IE */
+  -moz-transform: scale(1.5); /* FF */
+  -webkit-transform: scale(1.5); /* Safari and Chrome */
+  -o-transform: scale(1.5); /* Opera */
+  padding: 10px;
+  vertical-align: top;
+  margin-right: 10px;
+}
+
+form .input-group label.input-group-addon {
+    min-width: 160px;
+    text-align: right;
+}
+
+form .input-group {
+    margin-bottom: 8px;
+}
+
+form input[type=submit] {
+    margin-top: 8px;
+    display: block;
+}

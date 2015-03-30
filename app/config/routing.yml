@@ -3,8 +3,12 @@ application_main:
     type:     annotation
     prefix:   /
 
+# -------------------------------------------------------------------
+
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+# -------------------------------------------------------------------
 
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
@@ -15,6 +19,7 @@ _sonata_admin:
     type: sonata_admin
     prefix: /admin
     
+# -------------------------------------------------------------------
 
 sonata_user_security:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_security_1.xml"
@@ -39,6 +44,7 @@ sonata_user:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
     prefix: /admin
 
+# -------------------------------------------------------------------
 
 gallery:
     resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'

@@ -1,0 +1,9 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{%- block form_enctype -%}
+    {% if multipart %}enctype="multipart/form-data"{% endif %}
+{%- endblock form_enctype -%}
+
+{% block fos_user_content %}
+{% include "FOSUserBundle:Registration:register_content.html.twig" %}
+{% endblock fos_user_content %}

@@ -1,0 +1,54 @@
+sonata_admin:
+    title: Admin
+    title_logo: bundles/applicationmain/images/icon-large.png
+    
+    dashboard:
+        groups:
+            
+            sonata.user:
+                label: users
+                label_catalogue: SonataUserBundle
+                items:
+                   - sonata.user.admin.user
+                   - sonata.user.admin.group
+                item_adds:            []
+                roles:
+                    - ROLE_SUPER_ADMIN
+                   
+            sonata.media:
+                label: media
+                label_catalogue: SonataMediaBundle
+                items:
+                    - sonata.media.admin.media 
+                    - sonata.media.admin.gallery                                                                   
+                roles:
+                    - ROLE_ADMIN
+        
+            sonata.classification:
+                label: sonata_classification
+                label_catalogue: SonataClassificationBundle
+                items: ~
+                items:
+                    - sonata.classification.admin.category
+                    - sonata.classification.admin.collection
+                    - sonata.classification.admin.context
+                    - sonata.classification.admin.tag
+
+                item_adds: [] # 
+                    
+                roles:
+                    - ROLE_ADMIN
+                   
+        blocks:
+            -
+                position: left
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups:
+                        - sonata.media
+            -
+                position: right
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups:
+                        - sonata.user

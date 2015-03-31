@@ -3,11 +3,13 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     
-    - { resource: sonata/doctrine.yml }
-    - { resource: sonata/block.yml }
-    - { resource: sonata/admin.yml }
-    - { resource: sonata/user.yml }
-    - { resource: sonata/media.yml }
+    - { resource: friendsofsymfony/user.yml }
+    - { resource: friendsofsymfony/jsrouting.yml }
+    - { resource: sonata-project/doctrine.yml }
+    - { resource: sonata-project/block.yml }
+    - { resource: sonata-project/admin.yml }
+    - { resource: sonata-project/user.yml }
+    - { resource: sonata-project/media.yml }
     - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
 
 parameters:

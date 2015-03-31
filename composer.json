@@ -9,6 +9,7 @@
         }
     },
     "require": {
+        "knplabs/knp-paginator-bundle": "dev-master",
         
         "liuggio/excelbundle": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
@@ -40,6 +41,7 @@
     },
     "minimum-stability": "stable",
     "require-dev": {
+        "willdurand/faker-bundle": "@stable",
         "sensio/generator-bundle": "~2.3"
     },
     "scripts": {

@@ -3,6 +3,8 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     
+    - { resource: knp/doctrine.yml }
+    - { resource: knp/paginator.yml }
     - { resource: friendsofsymfony/user.yml }
     - { resource: friendsofsymfony/jsrouting.yml }
     - { resource: sonata-project/doctrine.yml }
@@ -12,12 +14,6 @@ imports:
     - { resource: sonata-project/media.yml }
     - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
 
-parameters:
-    knp.doctrine_behaviors.blameable_subscriber.user_entity: Appplication\Sonata\UserBundle\Entity\User
-
-fos_js_routing:
-    routes_to_expose:
-        - ".*"
 
 framework:
     #esi:             ~

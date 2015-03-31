@@ -11,7 +11,6 @@ doctrine:
                     ApplicationSonataClassificationBundle: ~
                     ApplicationSonataMediaBundle: ~
                     ApplicationSonataUserBundle: ~
-                    
     dbal:
         types:
             json: Sonata\Doctrine\Types\JsonType

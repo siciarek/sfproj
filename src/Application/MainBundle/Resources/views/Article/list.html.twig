@@ -25,7 +25,11 @@
 
                 {% for i in items %}
                     <tr>
-                        <td>{{ i.id }}</td>
+                        <td>
+                            <a class="badge" href="{{ path('article.item', { id: i.id }) }}">
+                                {{ i.id }}
+                            </a>
+                        </td>
                         <td>{{ i.translate(app.request.locale).title }}</td>
                         <td class="text-muted"><em>
                                 {% for a in i.authors %}

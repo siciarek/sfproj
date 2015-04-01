@@ -1,3 +1,14 @@
+# Phrases
+Previous: Poprz.
+Next: Nast.
+
+article:
+    name: Artykuł
+    name_plural: Artykuły
+    title: Tytuł
+    author: Autor
+    authors: Autorzy
+
 user:
     signin: Zaloguj się
     signout: Wyloguj się
@@ -10,6 +21,7 @@ common:
     about: O aplikacji
     help: Pomoc
     find_out_more: Dowiedz się więcej
+    created_at: Utworzono
 
 menu:
     home: Strona gł.

@@ -3,8 +3,8 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     
-    - { resource: knp/doctrine.yml }
-    - { resource: knp/paginator.yml }
+    - { resource: knplabs/doctrine.yml }
+    - { resource: knplabs/paginator.yml }
     - { resource: friendsofsymfony/user.yml }
     - { resource: friendsofsymfony/jsrouting.yml }
     - { resource: sonata-project/doctrine.yml }

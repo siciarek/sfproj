@@ -1,0 +1,22 @@
+Application\MainBundle\Entity\Author:
+    type: entity
+    table: author
+    repositoryClass: Application\MainBundle\Entity\AuthorRepository
+
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        firstName:
+            length: 64
+        lastName:
+            length: 64
+        info:
+            type: text
+
+    manyToMany:
+        articles:
+            targetEntity: Article
+            inversedBy: authors

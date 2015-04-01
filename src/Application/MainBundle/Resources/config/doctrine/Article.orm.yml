@@ -1,0 +1,25 @@
+Application\MainBundle\Entity\Article:
+    type: entity
+    table: article
+    repositoryClass: Application\MainBundle\Entity\ArticleRepository
+
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        title:
+            length: 255
+        content:
+            type: text
+            nullable: true
+        created_at:
+            type: datetime
+        updated_at:
+            type: datetime
+
+    manyToMany:
+        authors:
+            targetEntity: Author
+            mappedBy: articles

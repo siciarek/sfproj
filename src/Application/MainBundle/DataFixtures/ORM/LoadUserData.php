@@ -79,11 +79,14 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, F
                 $gender = \Sonata\UserBundle\Model\UserInterface::GENDER_FEMALE;
             }
                         
-            $username = strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', $firstname[0] . $lastname));
+            $firstname = trim($firstname);
+            $lastname = trim($lastname);            
+            $first = mb_substr($firstname, 0, 1);            
+            $uname = $first . $lastname;
+            
+            @$username = strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', $uname));
             
             $dob = $faker->dateTimeBetween($startDate = '-40 years', $endDate = '-25 years')->format('Y-m-d');
-            
-            var_dump($dob);
             
             $data[] = [
                 'enabled' => true,

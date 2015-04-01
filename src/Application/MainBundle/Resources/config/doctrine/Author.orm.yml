@@ -15,8 +15,11 @@ Application\MainBundle\Entity\Author:
             length: 64
         info:
             type: text
+            nullable: true
 
     manyToMany:
         articles:
             targetEntity: Article
             inversedBy: authors
+            cascade:
+                - persist

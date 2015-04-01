@@ -3,17 +3,12 @@
 namespace Application\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * Author
  */
 class Author
 {
-    use ORMBehaviors\Blameable\Blameable;
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\SoftDeletable\SoftDeletable;
-    
     /**
      * @var integer
      */

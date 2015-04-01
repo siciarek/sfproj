@@ -14,12 +14,10 @@ Application\MainBundle\Entity\Article:
         content:
             type: text
             nullable: true
-        created_at:
-            type: datetime
-        updated_at:
-            type: datetime
 
     manyToMany:
         authors:
             targetEntity: Author
             mappedBy: articles
+            cascade:
+                - persist

@@ -3,12 +3,17 @@
 namespace Application\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * Article
  */
 class Article
 {
+    use ORMBehaviors\Blameable\Blameable;
+    use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\SoftDeletable\SoftDeletable;
+    
     /**
      * @var integer
      */
@@ -23,16 +28,6 @@ class Article
      * @var string
      */
     private $content;
-
-    /**
-     * @var \DateTime
-     */
-    private $created_at;
-
-    /**
-     * @var \DateTime
-     */
-    private $updated_at;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -104,52 +99,6 @@ class Article
     }
 
     /**
-     * Set created_at
-     *
-     * @param \DateTime $createdAt
-     * @return Article
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get created_at
-     *
-     * @return \DateTime 
-     */
-    public function getCreatedAt()
-    {
-        return $this->created_at;
-    }
-
-    /**
-     * Set updated_at
-     *
-     * @param \DateTime $updatedAt
-     * @return Article
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updated_at = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updated_at
-     *
-     * @return \DateTime 
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updated_at;
-    }
-
-    /**
      * Add authors
      *
      * @param \Application\MainBundle\Entity\Author $authors
@@ -157,6 +106,7 @@ class Article
      */
     public function addAuthor(\Application\MainBundle\Entity\Author $authors)
     {
+        $authors->addArticle($this);
         $this->authors[] = $authors;
 
         return $this;
@@ -169,6 +119,7 @@ class Article
      */
     public function removeAuthor(\Application\MainBundle\Entity\Author $authors)
     {
+        $authors->removeArticle($this);
         $this->authors->removeElement($authors);
     }
 

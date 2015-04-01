@@ -13,7 +13,12 @@ class Author
     use ORMBehaviors\Blameable\Blameable;
     use ORMBehaviors\Timestampable\Timestampable;
     use ORMBehaviors\SoftDeletable\SoftDeletable;
-    
+
+    public function __toString()
+    {
+        return trim($this->getFirstName() . ' ' . $this->getLastName()) ? : '-';
+    }
+
     /**
      * @var integer
      */
@@ -50,7 +55,7 @@ class Author
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -73,7 +78,7 @@ class Author
     /**
      * Get firstName
      *
-     * @return string 
+     * @return string
      */
     public function getFirstName()
     {
@@ -96,7 +101,7 @@ class Author
     /**
      * Get lastName
      *
-     * @return string 
+     * @return string
      */
     public function getLastName()
     {
@@ -119,7 +124,7 @@ class Author
     /**
      * Get info
      *
-     * @return string 
+     * @return string
      */
     public function getInfo()
     {
@@ -152,7 +157,7 @@ class Author
     /**
      * Get articles
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getArticles()
     {

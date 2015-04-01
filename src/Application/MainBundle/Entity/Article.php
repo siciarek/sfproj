@@ -14,7 +14,10 @@ class Article
     use ORMBehaviors\Timestampable\Timestampable;
     use ORMBehaviors\SoftDeletable\SoftDeletable;
     use ORMBehaviors\Translatable\Translatable;
-    
+
+    public function __toString() {
+         return strval($this->id ? : '-');
+    }
     /**
      * @var integer
      */

@@ -10,9 +10,6 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  */
 class ArticleTranslation
 {
-    use ORMBehaviors\Blameable\Blameable;
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\SoftDeletable\SoftDeletable;
     use ORMBehaviors\Translatable\Translation;
 
     /**

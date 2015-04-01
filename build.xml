@@ -3,7 +3,7 @@
 
 <project name="application" default="cc" basedir=".">
 
-    <loadproperties srcFile="properties.cnf"/>
+    <loadproperties srcFile="properties.conf"/>
 
     <property name="doc.source.dir" value="src/Application/MainBundle/Resources/doc"/>
     <property name="doc.html.target.dir" value="web/doc"/>
@@ -43,7 +43,7 @@
 
     <target name="cc" description="Czyszczenie katalogu cache">
         <delete includeemptydirs="true" verbose="true" >
-            <fileset dir="app/cache" includes="**/*"/>
+            <fileset dir="app/cache" includes="**/*" excludes=".gitkeep"/>
         </delete>
     </target>
 

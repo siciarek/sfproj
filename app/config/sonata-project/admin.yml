@@ -1,10 +1,48 @@
+services:
+
+    application.admin.article:
+        class: Application\MainBundle\Admin\ArticleAdmin
+        tags:
+            -
+                name: sonata.admin
+                manager_type: orm
+                label: article.name_plural
+        arguments:
+            - ~
+            - Application\MainBundle\Entity\Article
+            - ~
+
+    application.admin.author:
+        class: Application\MainBundle\Admin\AuthorAdmin
+        tags:
+            -
+                name: sonata.admin
+                manager_type: orm
+                label: article.authors
+        arguments:
+            - ~
+            - Application\MainBundle\Entity\Author
+            - ~
+
 sonata_admin:
     title: Admin
     title_logo: bundles/applicationmain/images/icon-large.png
-    
+
     dashboard:
         groups:
-            
+
+            application.article:
+                label: article.name_plural
+                label_catalogue: messages
+                items:
+                    - application.admin.article
+                    - application.admin.author
+
+
+                item_adds: []
+                roles:
+                    - ROLE_ADMIN
+
             sonata.user:
                 label: users
                 label_catalogue: SonataUserBundle
@@ -14,16 +52,16 @@ sonata_admin:
                 item_adds:            []
                 roles:
                     - ROLE_SUPER_ADMIN
-                   
+
             sonata.media:
                 label: media
                 label_catalogue: SonataMediaBundle
                 items:
-                    - sonata.media.admin.media 
-                    - sonata.media.admin.gallery                                                                   
+                    - sonata.media.admin.media
+                    - sonata.media.admin.gallery
                 roles:
                     - ROLE_ADMIN
-        
+
             sonata.classification:
                 label: sonata_classification
                 label_catalogue: SonataClassificationBundle
@@ -34,17 +72,18 @@ sonata_admin:
                     - sonata.classification.admin.context
                     - sonata.classification.admin.tag
 
-                item_adds: [] # 
-                    
+                item_adds: []
+
                 roles:
                     - ROLE_ADMIN
-                   
+
         blocks:
             -
                 position: left
                 type: sonata.admin.block.admin_list
                 settings:
                     groups:
+                        - application.article
                         - sonata.media
             -
                 position: right

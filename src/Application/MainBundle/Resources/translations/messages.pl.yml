@@ -6,6 +6,7 @@ article:
     name: Artykuł
     name_plural: Artykuły
     title: Tytuł
+    content: Treść
     author: Autor
     authors: Autorzy
 

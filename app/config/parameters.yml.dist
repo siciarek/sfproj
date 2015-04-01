@@ -1,14 +1,14 @@
 # This file is a "template" of what your parameters.yml file should look like
 parameters:
     
-    app_name: Template
+    app_name: Sf Tmpl
     app_description: Symfony 2 application template.
     app_keywords: symfony, template
     
     database_driver:   pdo_mysql
     database_host:     127.0.0.1
-    database_port:     ~
-    database_name:     symfony
+    database_port:     3306
+    database_name:     sfproj
     database_user:     root
     database_password: ~
     # You should uncomment this if you want use pdo_sqlite

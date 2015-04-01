@@ -68,8 +68,8 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
             $content = implode("\n", $content);
 
             $obj = new \Application\MainBundle\Entity\Article();
-            $obj->setTitle($title);
-            $obj->setContent($content);
+            $obj->translate('pl')->setTitle($title);
+            $obj->translate('pl')->setContent($content);
             $obj->setCreatedBy($creator);
             $obj->setUpdatedBy($creator);
 
@@ -88,6 +88,8 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
             }
             
             $manager->persist($obj);
+            $obj->mergeNewTranslations();
+            
             $manager->flush();
             $manager->clear();
         }

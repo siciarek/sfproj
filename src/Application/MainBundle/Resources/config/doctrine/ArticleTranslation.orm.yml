@@ -1,0 +1,16 @@
+Application\MainBundle\Entity\ArticleTranslation:
+    type: entity
+    table: article_translation
+    repositoryClass: Application\MainBundle\Entity\ArticleTranslationRepository
+
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        title:
+            length: 255
+        content:
+            type: text
+            nullable: true

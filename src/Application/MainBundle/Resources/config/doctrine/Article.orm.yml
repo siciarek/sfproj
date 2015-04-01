@@ -9,11 +9,6 @@ Application\MainBundle\Entity\Article:
             id: true
             generator:
                 strategy: AUTO
-        title:
-            length: 255
-        content:
-            type: text
-            nullable: true
 
     manyToMany:
         authors:

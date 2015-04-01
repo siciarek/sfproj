@@ -2,53 +2,24 @@
 
 {% block content %}
 
+    {% set authors = [] %}
+
+    {% for a in item.authors %}
+        {% set authors = authors|merge([ a.firstName~' '~a.lastName ]) %}
+    {% endfor %}
+
     <h1 class="page-header">
         <i class="fa fa-copy text-muted"></i>
-        {{ 'article.name_plural'|trans }} ({{ items.getTotalItemCount }})
+        {{ item.translate(app.request.locale).title }}
+
+        <a class="btn btn-warning pull-right" onclick="history.back()">
+            <i class="fa fa-arrow-circle-left fa-lg"></i>
+        </a>
     </h1>
 
-    {% if items|length == 0 %}
+    <div class="alert alert-info">
+        {{ authors|join(', ') }}
+    </div>
 
-    {% else %}
-        <table class="table table-condensed">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>{{ 'article.title'|trans }}</th>
-                    <th>{{ 'article.authors'|trans }}</th>
-                    <th>{{ 'common.created_at'|trans }}</th>
-                    <th>&nbsp;</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                {% for i in items %}
-                    <tr>
-                        <td>{{ i.id }}</td>
-                        <td>{{ i.translate(app.request.locale).title }}</td>
-                        <td class="text-muted"><em>
-                                {% for a in i.authors %}
-                                    {{ a.firstName }} {{ a.lastName }}<br/>
-                                {% endfor %}</em>
-                        </td>
-                        <td>{{ i.createdAt|date('Y-m-d H:i') }}</td>
-                        <td>
-                            <a class="btn btn-default btn-xs" href="#">
-                                <i class="fa fa-eye fa-lg"></i>
-                            </a>
-                            <a class="btn btn-danger btn-xs" href="#">
-                                <i class="fa fa-times-circle fa-lg"></i>
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-
-            </tbody>
-        </table>
-
-        {{ knp_pagination_render(items) }}
-
-    {% endif %}
-
+    <pre style="white-space: pre-wrap">{{ item.translate(app.request.locale).content }}</pre>
 {% endblock %}

@@ -8,7 +8,7 @@
     </h1>
 
     {% if items|length == 0 %}
-
+        <div class="alert alert-warning">{{ 'common.list_is_empty'|trans }}</div>
     {% else %}
         <table class="table table-condensed">
             <thead>
@@ -34,11 +34,8 @@
                         </td>
                         <td>{{ i.createdAt|date('Y-m-d H:i') }}</td>
                         <td>
-                            <a class="btn btn-default btn-xs" href="#">
+                            <a class="btn btn-default btn-xs" href="{{ path('article.item', { id: i.id }) }}">
                                 <i class="fa fa-eye fa-lg"></i>
-                            </a>
-                            <a class="btn btn-danger btn-xs" href="#">
-                                <i class="fa fa-times-circle fa-lg"></i>
                             </a>
                         </td>
                     </tr>

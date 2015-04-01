@@ -22,6 +22,7 @@ common:
     help: Pomoc
     find_out_more: Dowiedz się więcej
     created_at: Utworzono
+    list_is_empty: Lista jest pusta.
 
 menu:
     home: Strona gł.

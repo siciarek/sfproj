@@ -64,8 +64,8 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
             $title = $faker->sentence(4);
             $title = preg_replace('/\.$/', '', $title);
 
-            $content = $faker->paragraphs();
-            $content = implode("\n", $content);
+            $content = $faker->paragraphs(10);
+            $content = implode("\n\n", $content);
 
             $obj = new \Application\MainBundle\Entity\Article();
             $obj->translate('pl')->setTitle($title);

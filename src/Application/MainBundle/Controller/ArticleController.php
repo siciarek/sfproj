@@ -13,6 +13,22 @@ use Symfony\Component\HttpFoundation\Request;
 class ArticleController extends Controller {
 
     /**
+     * @Route("/item/{id}", name="article.item")
+     * @Template()
+     */
+    public function itemAction($id) {
+        
+        $item = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('\Application\MainBundle\Entity\Article')
+                ->findOneBy(['id' => $id]);
+        
+        return [
+            'item' => $item,
+        ];
+    }
+    
+    /**
      * @Route("/list", name="article.list")
      * @Template()
      */

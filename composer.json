@@ -9,6 +9,7 @@
         }
     },
     "require": {
+        "a2lix/translation-form-bundle": "dev-master",
         "knplabs/knp-paginator-bundle": "dev-master",
         
         "liuggio/excelbundle": "dev-master",

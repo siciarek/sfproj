@@ -13,6 +13,7 @@ imports:
     - { resource: sonata-project/user.yml }
     - { resource: sonata-project/media.yml }
     - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
+    - { resource: a2lix/translation-form.yml }
 
 
 framework:

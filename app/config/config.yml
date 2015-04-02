@@ -3,7 +3,8 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     
-    - { resource: knplabs/doctrine.yml }
+    - { resource: stof/doctrine-extensions.yml }
+    - { resource: knplabs/doctrine-extensions.yml }
     - { resource: knplabs/paginator.yml }
     - { resource: friendsofsymfony/user.yml }
     - { resource: friendsofsymfony/jsrouting.yml }
@@ -12,8 +13,8 @@ imports:
     - { resource: sonata-project/admin.yml }
     - { resource: sonata-project/user.yml }
     - { resource: sonata-project/media.yml }
-    - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
     - { resource: a2lix/translation-form.yml }
+    - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
 
 
 framework:

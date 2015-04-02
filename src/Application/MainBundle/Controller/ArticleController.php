@@ -34,7 +34,8 @@ class ArticleController extends Controller {
      */
     public function listAction(Request $request) {
         
-        $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
+        $em = $this->getDoctrine()->getManager();
+        $qb = $em->createQueryBuilder();
         
         $query = $qb
                 ->from('\Application\MainBundle\Entity\Article', 'a')

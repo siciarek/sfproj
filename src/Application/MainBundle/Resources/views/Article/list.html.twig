@@ -30,7 +30,7 @@
                                 {{ i.id }}
                             </a>
                         </td>
-                        <td>{{ i.translate(app.request.locale).title }}</td>
+                        <td>{{ i.title }}</td>
                         <td class="text-muted"><em>
                                 {% for a in i.authors %}
                                     {{ a.firstName }} {{ a.lastName }}<br/>

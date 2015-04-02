@@ -8,6 +8,7 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),

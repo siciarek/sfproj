@@ -15,6 +15,11 @@ class Article
     use ORMBehaviors\SoftDeletable\SoftDeletable;
     use ORMBehaviors\Translatable\Translatable;
 
+//    public function __call($method, $arguments)
+//    {
+//        return $this->proxyCurrentLocaleTranslation($method, $arguments);
+//    }
+    
     public function __toString() {
          return strval($this->id ? : '-');
     }

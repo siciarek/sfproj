@@ -8,6 +8,15 @@
             "Application": "app/"
         }
     },
+    "minimum-stability": "stable",
+    "require-dev": {
+        "behat/behat": "dev-master",
+        "behat/symfony2-extension": "dev-master",
+
+        "phpunit/phpunit": "3.7.*",
+        "willdurand/faker-bundle": "@stable",
+        "sensio/generator-bundle": "~2.3"
+    },
     "require": {
         "stof/doctrine-extensions-bundle": "~1.1@dev",
         "a2lix/translation-form-bundle": "dev-master",
@@ -40,11 +49,6 @@
         "sensio/distribution-bundle": "~3.0,>=3.0.12",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "incenteev/composer-parameter-handler": "~2.0"
-    },
-    "minimum-stability": "stable",
-    "require-dev": {
-        "willdurand/faker-bundle": "@stable",
-        "sensio/generator-bundle": "~2.3"
     },
     "scripts": {
         "post-root-package-install": [

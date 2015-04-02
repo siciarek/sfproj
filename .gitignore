@@ -1,5 +1,6 @@
 .idea
 
+/behat.yml
 /web/uploads
 /properties.cnf
 /composer.lock

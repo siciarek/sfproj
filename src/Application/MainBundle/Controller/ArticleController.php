@@ -17,31 +17,36 @@ class ArticleController extends Controller {
      * @Template()
      */
     public function itemAction($id) {
-        
+
         $item = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('\Application\MainBundle\Entity\Article')
                 ->findOneBy(['id' => $id]);
-        
+
         return [
             'item' => $item,
         ];
     }
-    
+
     /**
      * @Route("/list", name="article.list")
      * @Template()
      */
     public function listAction(Request $request) {
-        
+
         $em = $this->getDoctrine()->getManager();
         $qb = $em->createQueryBuilder();
-        
+
         $query = $qb
                 ->from('\Application\MainBundle\Entity\Article', 'a')
                 ->select('a')
                 ->getQuery()
         ;
+
+        $query->setHint(
+            \Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER,
+            'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
+        );
 
         $paginator = $this->get('knp_paginator');
         $page = $request->query->get('page', 1);

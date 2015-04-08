@@ -1,0 +1,35 @@
+# Phrases
+Previous: Prev.
+Next: Next
+
+article:
+    name: Article
+    name_plural: Articles
+    title: Title
+    content: Content
+    author: Author
+    authors: Authors
+
+user:
+    signin: Sign in
+    signout: Sign out
+
+common:
+    home: Home
+    info: Info
+    contact: Contact
+    authors: Authors
+    about: About
+    help: Help
+    find_out_more: Find out more
+    created_at: Created at
+    list_is_empty: List is empty.
+
+menu:
+    home: Home
+    info: Info
+    contact: Contact
+    authors: Authors
+    about: About
+    help: Help
+    

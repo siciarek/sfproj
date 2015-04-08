@@ -1,56 +1,160 @@
 <?php
-
 namespace Application\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Gedmo\Translatable\Entity\MappedSuperclass\AbstractTranslation;
 
 /**
- * Article
+ * @ORM\Table(name="article_translation", indexes={
+ *      @ORM\Index(name="article_translation_idx", columns={"locale", "object_class", "field", "foreign_key"})
+ * })
+ * @ORM\Entity(repositoryClass="Gedmo\Translatable\Entity\Repository\TranslationRepository")
  */
-class ArticleTranslation
+class ArticleTranslation extends AbstractTranslation
 {
-    use ORMBehaviors\Translatable\Translation;
-
     /**
-     * @var string
+     * All required columns are mapped through inherited superclass
      */
-    private $title;
-
+    
     /**
-     * @var string
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
-    private $content;
-
+    protected $id;
 
     /**
-     * Set title
+     * @ORM\Column(name="locale")
+     */
+    protected $locale;
+
+    /**
+     * @ORM\Column(name="object_class")
+     */
+    protected $objectClass;
+
+    /**
+     * @ORM\Column(name="field")
+     */
+    protected $field;
+
+    /**
+     * @ORM\Column(name="foreign_key")
+     */
+    protected $foreignKey;
+
+    /**
+     * @ORM\Column(name="content")
+     */
+    protected $content;
+
+    /**
+     * Get id
      *
-     * @param string $title
-     * @return Article
+     * @return integer 
      */
-    public function setTitle($title)
+    public function getId()
     {
-        $this->title = $title;
+        return $this->id;
+    }
+
+    /**
+     * Set locale
+     *
+     * @param string $locale
+     * @return ArticleTranslation
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
 
         return $this;
     }
 
     /**
-     * Get title
+     * Get locale
      *
      * @return string 
      */
-    public function getTitle()
+    public function getLocale()
     {
-        return $this->title;
+        return $this->locale;
+    }
+
+    /**
+     * Set objectClass
+     *
+     * @param string $objectClass
+     * @return ArticleTranslation
+     */
+    public function setObjectClass($objectClass)
+    {
+        $this->objectClass = $objectClass;
+
+        return $this;
+    }
+
+    /**
+     * Get objectClass
+     *
+     * @return string 
+     */
+    public function getObjectClass()
+    {
+        return $this->objectClass;
+    }
+
+    /**
+     * Set field
+     *
+     * @param string $field
+     * @return ArticleTranslation
+     */
+    public function setField($field)
+    {
+        $this->field = $field;
+
+        return $this;
+    }
+
+    /**
+     * Get field
+     *
+     * @return string 
+     */
+    public function getField()
+    {
+        return $this->field;
+    }
+
+    /**
+     * Set foreignKey
+     *
+     * @param string $foreignKey
+     * @return ArticleTranslation
+     */
+    public function setForeignKey($foreignKey)
+    {
+        $this->foreignKey = $foreignKey;
+
+        return $this;
+    }
+
+    /**
+     * Get foreignKey
+     *
+     * @return string 
+     */
+    public function getForeignKey()
+    {
+        return $this->foreignKey;
     }
 
     /**
      * Set content
      *
      * @param string $content
-     * @return Article
+     * @return ArticleTranslation
      */
     public function setContent($content)
     {

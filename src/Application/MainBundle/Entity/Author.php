@@ -6,44 +6,44 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
- * Author
+ * Application\MainBundle\Entity\Article
+ *
+ * @ORM\Table(name="author")
+ * @ORM\Entity(repositoryClass="Application\MainBundle\Entity\AuthorRepository")
  */
 class Author
 {
     use ORMBehaviors\Blameable\Blameable;
     use ORMBehaviors\Timestampable\Timestampable;
     use ORMBehaviors\SoftDeletable\SoftDeletable;
-
-    public function __toString()
-    {
-        return trim($this->getFirstName() . ' ' . $this->getLastName()) ? : '-';
-    }
-
+    
     /**
-     * @var integer
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
+     * @ORM\Column(name="first_name")
      */
     private $firstName;
 
     /**
-     * @var string
+     * @ORM\Column(name="last_name")
      */
     private $lastName;
 
     /**
-     * @var string
+     * @ORM\Column(name="info", type="text")
      */
     private $info;
 
+
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @ORM\ManyToMany(targetEntity="Article", inversedBy="authors", cascade={"persist"})
      */
     private $articles;
-
     /**
      * Constructor
      */
@@ -55,7 +55,7 @@ class Author
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -78,7 +78,7 @@ class Author
     /**
      * Get firstName
      *
-     * @return string
+     * @return string 
      */
     public function getFirstName()
     {
@@ -101,7 +101,7 @@ class Author
     /**
      * Get lastName
      *
-     * @return string
+     * @return string 
      */
     public function getLastName()
     {
@@ -124,7 +124,7 @@ class Author
     /**
      * Get info
      *
-     * @return string
+     * @return string 
      */
     public function getInfo()
     {
@@ -157,7 +157,7 @@ class Author
     /**
      * Get articles
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getArticles()
     {

@@ -56,40 +56,55 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
             $manager->persist($obj);
             $manager->flush();
             $manager->clear();
-            
+
             $this->setReference('author' . $i, $obj);
         }
 
-        foreach (range(1, $arcount) as $i) {
-            $title = $faker->sentence(4);
-            $title = preg_replace('/\.$/', '', $title);
+        $repository = $manager->getRepository('Gedmo\\Translatable\\Entity\\Translation');
 
-            $content = $faker->paragraphs(10);
-            $content = implode("\n\n", $content);
+        foreach (range(1, $arcount) as $i) {
 
             $obj = new \Application\MainBundle\Entity\Article();
-            $obj->translate('pl')->setTitle($title);
-            $obj->translate('pl')->setContent($content);
+
             $obj->setCreatedBy($creator);
             $obj->setUpdatedBy($creator);
 
+
+            $title = $faker->sentence(4);
+            $title = preg_replace('/\.$/', '', $title);
+            $content = $faker->paragraphs(10);
+            $content = implode("\n\n", $content);
+
+            $obj->setTranslatableLocale('pl');
+            $obj->setTitle($title);
+            $obj->setContent($content);
+
+            $title = $faker->sentence(4);
+            $title = preg_replace('/\.$/', '', $title);
+            $content = $faker->paragraphs(10);
+            $content = implode("\n\n", $content);
+
+            $repository
+                    ->translate($obj, 'title', 'en', $title)
+                    ->translate($obj, 'content', 'en', $content)
+            ;
+
             $au = [];
-            foreach(range(1, rand(1, 3)) as $a) {
+            foreach (range(1, rand(1, 3)) as $a) {
                 do {
                     $a = rand(1, 100);
-                } while(in_array($a, $au));
-                
+                } while (in_array($a, $au));
+
                 $au[] = $a;
             }
-            
-            foreach($au as $auid) {
+
+            foreach ($au as $auid) {
                 $author = $this->getReference('author' . $auid);
                 $obj->addAuthor($author);
             }
-            
+
             $manager->persist($obj);
-            $obj->mergeNewTranslations();
-            
+
             $manager->flush();
             $manager->clear();
         }

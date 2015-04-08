@@ -4,35 +4,55 @@ namespace Application\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 /**
- * Article
+ * Application\MainBundle\Entity\Article
+ *
+ * @ORM\Table(name="article")
+ * @ORM\Entity(repositoryClass="Application\MainBundle\Entity\ArticleRepository")
+ * @Gedmo\TranslationEntity(class="Application\MainBundle\Entity\ArticleTranslation")
  */
-class Article
+class Article implements Translatable
 {
     use ORMBehaviors\Blameable\Blameable;
     use ORMBehaviors\Timestampable\Timestampable;
     use ORMBehaviors\SoftDeletable\SoftDeletable;
-    use ORMBehaviors\Translatable\Translatable;
-
-//    public function __call($method, $arguments)
-//    {
-//        return $this->proxyCurrentLocaleTranslation($method, $arguments);
-//    }
     
-    public function __toString() {
-         return strval($this->id ? : '-');
-    }
     /**
-     * @var integer
+     * @Gedmo\Locale
+     */
+    private $locale;
+    
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
+    }
+    
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @ORM\Column(name="title", type="string", length=255)
+     * @Gedmo\Translatable
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(name="content", type="text")
+     * @Gedmo\Translatable
+     */
+    private $content;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Author", mappedBy="articles", cascade={"persist"})
      */
     private $authors;
-
     /**
      * Constructor
      */
@@ -49,6 +69,52 @@ class Article
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Article
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set content
+     *
+     * @param string $content
+     * @return Article
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string 
+     */
+    public function getContent()
+    {
+        return $this->content;
     }
 
     /**

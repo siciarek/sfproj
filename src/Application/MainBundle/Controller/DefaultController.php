@@ -25,4 +25,13 @@ class DefaultController extends Controller
     {
         return [];
     }
+    
+    /**
+     * @Route("/locale/switch/{locale}", name="locale.switch")
+     */
+    public function switchAction($locale) 
+    {
+        $this->get('request')->setLocale($locale);
+        return $this->redirect('/');
+    }
 }

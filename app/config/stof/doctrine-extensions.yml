@@ -12,7 +12,7 @@ services:
             - { name: doctrine.event_subscriber, connection: default }
         calls:
             - [ setDefaultLocale, [ %locale% ] ]
-            - [ setTranslationFallback, [ true ] ]
+            - [ setTranslationFallback, [ false ] ]
 
 doctrine:
     orm:

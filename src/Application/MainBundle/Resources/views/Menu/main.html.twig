@@ -59,7 +59,7 @@
 
                                                 <li>
                                                     <a href="{{ path(c.route, c.routeParams is defined ? c.routeParams : []) }}">
-                                                        <i class="fa {% if c == active %}fa-check {% endif %}fa-fw"></i>
+                                                        <i class="fa {% if c == active or (c.active is defined and c.active == true) %}fa-check {% endif %}fa-fw"></i>
                                                         {{ c.text|trans }}
                                                     </a>
                                                 </li>     

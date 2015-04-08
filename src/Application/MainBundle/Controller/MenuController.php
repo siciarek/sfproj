@@ -19,9 +19,29 @@ class MenuController extends Controller {
 
         $menuConfig = realpath(__DIR__ . '/../Resources/config/menu.yml');
 
+		$locale = $this->container->get('request')->getLocale();
+		
+		$locales = LocaleController::$locales;
+		
+		$loc = [
+			'text' => $locales[$locale],
+			'icon' => 'globe',
+			'children' => [],				
+		];
+		
+		foreach($locales as $code => $lang) {
+			$loc['children'][] = [
+				'text' => $lang,
+				'route' => 'locale.switch',
+				'routeParams' => [ 'locale' => $code ],
+				'active' => $code === $locale,
+			];
+		}
+		
         $data = \Symfony\Component\Yaml\Yaml::parse($menuConfig);
-
         $data['route'] = $route;
+		
+		$data['menu'][] = $loc;
 
         return $data;
     }

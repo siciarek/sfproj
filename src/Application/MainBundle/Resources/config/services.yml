@@ -1,0 +1,11 @@
+services:
+
+    locale.listener:
+        class: Application\MainBundle\EventListener\LocaleListener
+        arguments:
+            - @kernel
+        tags:
+            -
+                name:   kernel.event_listener
+                event:  kernel.controller
+                method: handleCoreController

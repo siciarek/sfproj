@@ -10,7 +10,7 @@
 
     <h1 class="page-header">
         <i class="fa fa-copy text-muted"></i>
-        {{ item.translate(app.request.locale).title }}
+        {{ item.title }}
 
         <a class="btn btn-warning pull-right" onclick="history.back()">
             <i class="fa fa-arrow-circle-left fa-lg"></i>
@@ -22,5 +22,5 @@
         {{ authors|join(', ') }}
     </div>
 
-    <pre style="white-space: pre-wrap">{{ item.translate(app.request.locale).content }}</pre>
+    <pre style="white-space: pre-wrap">{{ item.content }}</pre>
 {% endblock %}

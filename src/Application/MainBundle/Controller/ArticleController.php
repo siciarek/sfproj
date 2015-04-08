@@ -15,17 +15,20 @@ class ArticleController extends Controller
 {
 
     /**
-     * @Route("/item/{id}", name="article.item")
+     * @Route("/item/{id}", name="article.item", requirements={"id"="^[1-9]\d*$"})
      * @Template()
      */
     public function itemAction($id)
     {
+        $query = $this->createQuery($id);
+		$items = $query->getResult();
 
-        $item = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('\Application\MainBundle\Entity\Article')
-            ->findOneBy(['id' => $id]);
-
+		if(count($items) !== 1) {
+			throw $this->createNotFoundException();
+		}
+		
+		$item = array_pop($items);
+		
         return [
             'item' => $item,
         ];
@@ -37,44 +40,45 @@ class ArticleController extends Controller
      */
     public function listAction(Request $request)
     {
-     //   $request->setLocale('en');
+        $query = $this->createQuery();
+        $page  = $request->query->get('page', 1);
+        $limit = $this->container->getParameter('pager_limit');
+        $items = $this->get('knp_paginator')->paginate($query, $page, $limit);
 
-		// $locale = $request->get('locale');
-
-        $em = $this->getDoctrine()->getManager();
+        return [
+            'items' => $items,
+        ];
+    }
+	
+	protected function createQuery($id = null) {
+		$em = $this->getDoctrine()->getManager();
         $qb = $em->createQueryBuilder();
 
-        $query = $qb
+        $qb
             ->from('\Application\MainBundle\Entity\Article', 'a')
             ->select('a')
-            ->getQuery()
-			
+		;
+		
+		if($id !== null) {
+			$qb->andWhere('a.id = :id')->setParameter('id', $id);
+		}
+        
+		$query = $qb->getQuery()
             ->setHint(
                 \Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER,
                 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
             )			
             ->setHint(
 				\Gedmo\Translatable\TranslatableListener::HINT_TRANSLATABLE_LOCALE,
-                $request->getLocale()
+                $this->container->get('request')->getLocale()
             )
-//            ->setHint(
-//                \Gedmo\Translatable\TranslatableListener::HINT_FALLBACK,
-//                1 // fallback to default values in case if record is not translated
-//            )
-            //->setHydrationMode(\Gedmo\Translatable\Query\TreeWalker\TranslationWalker::HYDRATE_OBJECT_TRANSLATION)
-            ->setHint(Query::HINT_REFRESH, true)
+            ->setHint(
+                \Gedmo\Translatable\TranslatableListener::HINT_FALLBACK,
+                1
+            )
         ;
-
-
-        $page  = $request->query->get('page', 1);
-        $limit = $this->container->getParameter('pager_limit');
-        $items = $this->get('knp_paginator')->paginate($query, $page, $limit);
-
-//        $items = $query->getResult();
-
-        return [
-            'items' => $items,
-        ];
-    }
+		
+		return $query;
+	}
 
 }

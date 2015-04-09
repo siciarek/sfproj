@@ -29,24 +29,30 @@ class ArticleAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('article.name')
-            ->add('authors', null, [
-                'label' => 'article.authors',
-            ])
-            ->add('translations', 'a2lix_translations', [
-                'label'  => false,
-                'fields' => [
-                    'title'   => [
-                        'label'      => 'article.title',
-                        'field_type' => 'text',
-                    ],
-                    'content' => [
-                        'label'      => 'article.content',
-                        'field_type' => 'textarea',
-                    ]
-                ]
-            ])
-            ->end();
+//            ->with('article.name')
+//            ->add('authors', null, [
+//                'label' => 'article.authors',
+//            ])
+            ->add('title', 'translatable_field', array(
+                'field'                => 'title',
+                'personal_translation' => 'Application\MainBundle\Entity\ArticleTranslation',
+                'property_path'        => 'translations',
+            ))
+//            ->add('translations', 'a2lix_translations', [
+//                'label'  => false,
+//                'fields' => [
+//                    'title'   => [
+//                        'label'      => 'article.title',
+//                        'field_type' => 'text',
+//                    ],
+//                    'content' => [
+//                        'label'      => 'article.content',
+//                        'field_type' => 'textarea',
+//                    ]
+//                ]
+//            ])
+//            ->end()
+                ;
 
     }
 }

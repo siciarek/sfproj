@@ -23,7 +23,7 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
         $arcount = 400;
         $aucount = 100;
 
-        $faker = $faker = \Faker\Factory::create('pl_PL');
+        $faker = \Faker\Factory::create('pl_PL');
 
         $creator = $this->getReference('user' . 'jsiciarek');
 
@@ -75,7 +75,6 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
             $content = $faker->paragraphs(10);
             $content = implode("\n\n", $content);
 
-            $obj->setTranslatableLocale('pl');
             $obj->setTitle($title);
             $obj->setContent($content);
 
@@ -84,10 +83,22 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
             $content = $faker->paragraphs(10);
             $content = implode("\n\n", $content);
 
-            $repository
-                    ->translate($obj, 'title', 'en', $title)
-                    ->translate($obj, 'content', 'en', $content)
-            ;
+            $manager->persist($obj);
+            $manager->flush();
+            $manager->clear();
+
+            $titleTrans =  new \Application\MainBundle\Entity\ArticleTranslation();
+            $titleTrans->setLocale('en');
+            $titleTrans->setField('title');
+            $titleTrans->setContent($title);
+            
+            $contentTrans =  new \Application\MainBundle\Entity\ArticleTranslation();
+            $contentTrans->setLocale('en');
+            $contentTrans->setField('content');
+            $contentTrans->setContent($content);
+            
+            $obj->addTranslation($titleTrans);
+            $obj->addTranslation($contentTrans);
 
             $au = [];
             foreach (range(1, rand(1, 3)) as $a) {

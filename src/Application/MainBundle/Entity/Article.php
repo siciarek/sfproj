@@ -53,12 +53,18 @@ class Article implements Translatable
      * @ORM\ManyToMany(targetEntity="Author", mappedBy="articles", cascade={"persist"})
      */
     private $authors;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ArticleTranslation", mappedBy="object", cascade={"persist"})
+     */
+    private $translations;
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -125,7 +131,6 @@ class Article implements Translatable
      */
     public function addAuthor(\Application\MainBundle\Entity\Author $authors)
     {
-        $authors->addArticle($this);
         $this->authors[] = $authors;
 
         return $this;
@@ -138,7 +143,6 @@ class Article implements Translatable
      */
     public function removeAuthor(\Application\MainBundle\Entity\Author $authors)
     {
-        $authors->removeArticle($this);
         $this->authors->removeElement($authors);
     }
 
@@ -150,5 +154,38 @@ class Article implements Translatable
     public function getAuthors()
     {
         return $this->authors;
+    }
+
+    /**
+     * Add translations
+     *
+     * @param \Application\MainBundle\Entity\ArticleTranslation $translations
+     * @return Article
+     */
+    public function addTranslation(\Application\MainBundle\Entity\ArticleTranslation $translations)
+    {
+        $this->translations[] = $translations;
+
+        return $this;
+    }
+
+    /**
+     * Remove translations
+     *
+     * @param \Application\MainBundle\Entity\ArticleTranslation $translations
+     */
+    public function removeTranslation(\Application\MainBundle\Entity\ArticleTranslation $translations)
+    {
+        $this->translations->removeElement($translations);
+    }
+
+    /**
+     * Get translations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTranslations()
+    {
+        return $this->translations;
     }
 }

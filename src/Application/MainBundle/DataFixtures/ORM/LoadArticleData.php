@@ -78,28 +78,31 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
             $obj->setTitle($title);
             $obj->setContent($content);
 
-            $title = $faker->sentence(4);
-            $title = preg_replace('/\.$/', '', $title);
-            $content = $faker->paragraphs(10);
-            $content = implode("\n\n", $content);
-
             $manager->persist($obj);
             $manager->flush();
             $manager->clear();
 
+            $title = $faker->sentence(4);
+            $title = preg_replace('/\.$/', '', $title);
+            $content = $faker->paragraphs(10);
+            $content = implode("\n\n", $content);
+            
+            $obj->setTranslatableLocale('en');
+            
             $titleTrans =  new \Application\MainBundle\Entity\ArticleTranslation();
             $titleTrans->setLocale('en');
             $titleTrans->setField('title');
             $titleTrans->setContent($title);
+            $titleTrans->setObject($obj);
+            $manager->persist($titleTrans);
             
             $contentTrans =  new \Application\MainBundle\Entity\ArticleTranslation();
             $contentTrans->setLocale('en');
             $contentTrans->setField('content');
             $contentTrans->setContent($content);
+            $contentTrans->setObject($obj);
+            $manager->persist($contentTrans);
             
-            $obj->addTranslation($titleTrans);
-            $obj->addTranslation($contentTrans);
-
             $au = [];
             foreach (range(1, rand(1, 3)) as $a) {
                 do {

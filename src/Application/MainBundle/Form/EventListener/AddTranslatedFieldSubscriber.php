@@ -26,7 +26,6 @@ class AddTranslatedFieldSubscriber implements EventSubscriberInterface {
         // , form.post_data and form.bind_norm_data event
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::POST_SET_DATA => 'bindNormData',
             FormEvents::POST_BIND => 'postBind',
         );
     }
@@ -149,6 +148,8 @@ class AddTranslatedFieldSubscriber implements EventSubscriberInterface {
                 }
             }
         }
+        
+        $this->bindNormData($event);
     }
 
     public function preSetData(\Symfony\Component\Form\FormEvent $event) {
@@ -165,6 +166,8 @@ class AddTranslatedFieldSubscriber implements EventSubscriberInterface {
             return;
         }
 
+        var_dump($data, $form);exit;
+        
         foreach ($this->bindTranslations($data) as $binded) {
             $form->add($this->factory->createNamed(
                             $this->options['widget'], $binded['fieldName'], $binded['translation']->getContent(), array(

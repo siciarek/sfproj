@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Process\Process;
 
 /**
@@ -20,18 +21,44 @@ class GraphController extends Controller {
      */
     public function renderAction($format = 'png') {
 
+        
+        $size = 8;
+        $matrix = [];
+
+        for ($r = 0; $r < $size; $r++) {
+            for ($c = 0; $c < $size; $c++) {
+                $matrix[$r][$c] = $r === $c ? 0 : rand(0, 10) > 8 ? 1 : 0;
+            }
+        }
+
+        
+        
+        $lines = [];
+
+        for ($r = 0; $r < count($matrix); $r++) {
+            $connected = [];
+
+            for ($c = 0; $c < count($matrix[0]); $c++) {
+                if ($matrix[$r][$c]) {
+                    $connected[] = $c;
+                }
+            }
+
+            if (count($connected) > 0) {
+                $lines[] = sprintf('%s -> {%s}', $r, implode(' ', $connected));
+            }
+        }
+
+        $grdef = implode("\n", $lines);
+
         $graph = <<<GRAPH
 digraph {
-    node  [ shape=circle, fontname="Helvetica bold", fontsize=24 ]
-
-    0 -> {1 2 3}
-    1 -> {4 5 6}
-    2 -> {7 8 9}
-    3 -> {10 11 12}
-    8 -> {13 14 15}
-    15 -> {16 17 18 19}
+    graph [ bgcolor=transparent ]
+    node  [ shape=circle, fontname="Helvetica bold", fontsize=24, style=filled, fillcolor=yellow ]
+    $grdef
 }
 GRAPH;
+
 
         $input = escapeshellarg($graph);
 
@@ -46,16 +73,16 @@ GRAPH;
             throw new \RuntimeException($process->getErrorOutput());
         }
 
-        $output = $process->getOutput();
-        $contentType = 'image/' . $format;
+        $content = $process->getOutput();
+
+        $finfo = new \finfo(FILEINFO_MIME_TYPE);
+        $contentType = $finfo->buffer($content);
 
         $headers = [
             'Content-Type' => $contentType,
         ];
-        
-        $response = new \Symfony\Component\HttpFoundation\Response($output, 200, $headers);
-        
-        return $response;
+
+        return new Response($content, 200, $headers);
     }
 
 }

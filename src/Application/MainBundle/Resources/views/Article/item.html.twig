@@ -17,8 +17,14 @@
     </h1>
 
     <div class="alert alert-info">
-        <i class="fa fa-edit fa-lg"></i>
-        {{ authors|join(', ') }}
+        <span>
+            <i class="fa fa-edit fa-lg"></i>
+            {{ authors|join(', ') }}
+        </span>
+        <span class="pull-right">
+            <i class="fa fa-clock-o fa-lg"></i>
+            {{ item.createdAt|date('Y-m-d H:i') }}
+        </span>
     </div>
 
     <pre style="white-space: pre-wrap">{{ item.translate(app.request.locale).content }}</pre>

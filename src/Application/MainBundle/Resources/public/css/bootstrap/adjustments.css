@@ -1,3 +1,25 @@
+/* <sortable-table-header> */
+
+.table thead th a.desc,
+.table thead th a.asc {
+    text-decoration: none !important;
+}
+
+.table thead th a.desc:after,
+.table thead th a.asc:after {
+    margin-left: 8px;
+}
+
+.table thead th a.asc:after {
+    content: 'A';
+}
+
+.table thead th a.desc:after {
+    content: 'V';
+}
+
+/* </sortable-table-header> */
+
 .btn i.fa-lg {
     vertical-align: 0;
 }

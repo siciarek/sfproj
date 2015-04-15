@@ -17,7 +17,7 @@
                     <th>#</th>
                     <th class="col-lg-6">{{ 'article.title'|trans }}</th>
                     <th>{{ 'article.authors'|trans }}</th>
-                    <th>{{ 'common.created_at'|trans }}</th>
+                    <th>{{ knp_pagination_sortable(items, 'common.created_at'|trans, 'a.createdAt') }}</th>
                     <th>&nbsp;</th>
                 </tr>
             </thead>

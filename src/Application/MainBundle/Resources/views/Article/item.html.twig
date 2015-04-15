@@ -11,8 +11,8 @@
         <i class="fa fa-copy text-muted"></i>
         {{ item.translate(app.request.locale).title }}
 
-        <a class="btn btn-warning pull-right" onclick="history.back()">
-            <i class="fa fa-arrow-circle-left fa-lg"></i>
+        <a class="btn btn-default pull-right" onclick="history.back()" title="{{ 'common.back_to_the_list'|trans }}">
+            <i class="fa fa-arrow-left fa-lg"></i>
         </a>
     </h1>
 

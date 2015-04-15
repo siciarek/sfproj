@@ -24,6 +24,8 @@ common:
     find_out_more: Dowiedz się więcej
     created_at: Utworzono
     list_is_empty: Lista jest pusta.
+    back_to_the_list: Powrót do listy
+    created_at: Utworzono
 
 menu:
     home: Strona gł.

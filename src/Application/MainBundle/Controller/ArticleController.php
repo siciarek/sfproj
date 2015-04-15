@@ -53,7 +53,8 @@ class ArticleController extends Controller {
         $qb
                 ->from('\Application\MainBundle\Entity\Article', 'a')
                 ->leftJoin('a.authors', 'au')
-                ->select('a, au')
+                ->leftJoin('a.translations', 't')
+                ->select('a, au, t')
         ;
 
         if ($id !== null) {

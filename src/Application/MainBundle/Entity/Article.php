@@ -13,17 +13,28 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="article")
  * @ORM\Entity(repositoryClass="Application\MainBundle\Entity\ArticleRepository")
  */
-class Article
-{
+class Article {
+
     use ORMBehaviors\Translatable\Translatable;
-    use ORMBehaviors\Blameable\Blameable;
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\SoftDeletable\SoftDeletable;
-        
+
+use ORMBehaviors\Blameable\Blameable;
+
+use ORMBehaviors\Timestampable\Timestampable;
+
+use ORMBehaviors\SoftDeletable\SoftDeletable;
+
     public function __toString() {
-        return strval($this->getId());
+        return $this->getTitle()? : '-';
     }
-    
+
+    public function getTitle() {
+        return $this->translate()->getTitle();
+    }
+
+    public function getContent() {
+        return $this->translate()->getContent();
+    }
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -35,23 +46,20 @@ class Article
      * @ORM\ManyToMany(targetEntity="Author", mappedBy="articles", cascade={"persist"})
      */
     private $authors;
-    
+
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
-    
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -61,8 +69,7 @@ class Article
      * @param \Application\MainBundle\Entity\Author $authors
      * @return Article
      */
-    public function addAuthor(\Application\MainBundle\Entity\Author $authors)
-    {
+    public function addAuthor(\Application\MainBundle\Entity\Author $authors) {
         $authors->addArticle($this);
         $this->authors[] = $authors;
 
@@ -74,8 +81,7 @@ class Article
      *
      * @param \Application\MainBundle\Entity\Author $authors
      */
-    public function removeAuthor(\Application\MainBundle\Entity\Author $authors)
-    {
+    public function removeAuthor(\Application\MainBundle\Entity\Author $authors) {
         $authors->removeArticle($this);
         $this->authors->removeElement($authors);
     }
@@ -85,8 +91,8 @@ class Article
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getAuthors()
-    {
+    public function getAuthors() {
         return $this->authors;
     }
+
 }

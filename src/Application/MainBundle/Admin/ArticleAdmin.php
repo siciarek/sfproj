@@ -14,15 +14,17 @@ class ArticleAdmin extends Admin {
 
     protected function configureListFields(ListMapper $listMapper) {
         $listMapper
-                ->add('title')
-                ->add('createdAt')
+                ->addIdentifier('title')
+                ->add('createdAt', null, [
+
+                ])
                 ->add('updatedAt')
-                ->add('_action', 'actions', array(
-                    'actions' => array(
-                        'edit' => array(),
-                        'delete' => array(),
-                    ),
-        ));
+                ->add('_action', 'actions', [
+                    'actions' => [
+                        'edit' => [],
+                        'delete' => [],
+                    ],
+        ]);
     }
 
     protected function configureFormFields(FormMapper $formMapper) {

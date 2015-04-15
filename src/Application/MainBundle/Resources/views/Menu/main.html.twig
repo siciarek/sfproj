@@ -17,7 +17,7 @@
         </div>
 
         <div id="navbar" class="collapse navbar-collapse">
-            
+
             <ul class="nav navbar-nav">
                 {% for m in menu %}
                     {% if m.children is defined %}
@@ -81,23 +81,32 @@
                         </li>     
                     {% endif %}
                 {% endfor %}               
-                
+
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    {% if is_granted('ROLE_USER') %}
+
+                {% if is_granted('ROLE_USER') %}
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-user fa-lg fa-fw"></i>
+                            {{ app.user.fullName }}
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ path('fos_user_security_logout') }}">
                             <i class="fa fa-lock fa-lg fa-fw"></i>
                             {{ 'user.signout'|trans }}                           
                         </a>
-                    {% else %}
+                    </li>
+                {% else %}
+                    <li>
                         <a href="{{ path('fos_user_security_login') }}">
                             <i class="fa fa-unlock-alt fa-lg fa-fw"></i>
                             {{ 'user.signin'|trans }}                           
                         </a>
-                    {% endif %}
-                </li>
+                    </li>
+                {% endif %}
             </ul>
 
         </div><!--/.nav-collapse -->

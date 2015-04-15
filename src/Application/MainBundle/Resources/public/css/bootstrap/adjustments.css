@@ -11,11 +11,11 @@
 }
 
 .table thead th a.asc:after {
-    content: 'A';
+    content: '▲';
 }
 
 .table thead th a.desc:after {
-    content: 'V';
+    content: '▼';
 }
 
 /* </sortable-table-header> */
@@ -33,14 +33,14 @@ form label {
 }
 
 form input[type=checkbox] {
-/* Double-sized Checkboxes */
-  -ms-transform: scale(1.5); /* IE */
-  -moz-transform: scale(1.5); /* FF */
-  -webkit-transform: scale(1.5); /* Safari and Chrome */
-  -o-transform: scale(1.5); /* Opera */
-  padding: 10px;
-  vertical-align: top;
-  margin-right: 10px;
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(1.5); /* IE */
+    -moz-transform: scale(1.5); /* FF */
+    -webkit-transform: scale(1.5); /* Safari and Chrome */
+    -o-transform: scale(1.5); /* Opera */
+    padding: 10px;
+    vertical-align: top;
+    margin-right: 10px;
 }
 
 form .input-group label.input-group-addon {

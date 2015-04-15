@@ -20,7 +20,7 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager) {
-        $arcount = 400;
+        $arcount = 100;
         $aucount = 100;
 
         $faker = \Faker\Factory::create('pl_PL');
@@ -97,6 +97,7 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
             $manager->persist($obj);
             $manager->flush();
             $manager->clear();
+            sleep(1);
         }
     }
 

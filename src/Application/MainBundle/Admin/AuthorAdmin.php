@@ -15,8 +15,8 @@ class AuthorAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('firstName')
-            ->add('lastName')
+            ->addIdentifier('firstName')
+            ->addIdentifier('lastName')
             ->add('createdAt')
             ->add('updatedAt')
             ->add('_action', 'actions', array(

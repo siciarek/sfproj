@@ -14,7 +14,7 @@ class ArticleTranslation
     use ORMBehaviors\Translatable\Translation;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(length=255)
      */
     protected $title;
 

@@ -39,7 +39,7 @@ class Author
     private $lastName;
 
     /**
-     * @ORM\Column(name="info", type="text")
+     * @ORM\Column(name="info", type="text", nullable=true)
      */
     private $info;
 

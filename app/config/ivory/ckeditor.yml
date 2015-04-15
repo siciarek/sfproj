@@ -1,0 +1,6 @@
+parameters:
+    templating.engines: [ 'twig' ]
+
+ivory_ck_editor:
+    enable: true
+    autoload: false

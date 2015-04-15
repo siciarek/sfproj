@@ -15,9 +15,7 @@ class ArticleAdmin extends Admin {
     protected function configureListFields(ListMapper $listMapper) {
         $listMapper
                 ->addIdentifier('title')
-                ->add('createdAt', null, [
-
-                ])
+                ->add('createdAt')
                 ->add('updatedAt')
                 ->add('_action', 'actions', [
                     'actions' => [
@@ -42,7 +40,9 @@ class ArticleAdmin extends Admin {
                         ],
                         'content' => [
                             'label' => 'article.content',
-                            'field_type' => 'textarea',
+                            'attr' => [
+                                'rows' => 16,
+                            ]
                         ]
                     ]
                 ])

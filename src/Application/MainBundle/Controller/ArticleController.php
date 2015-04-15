@@ -52,24 +52,15 @@ class ArticleController extends Controller {
 
         $qb
                 ->from('\Application\MainBundle\Entity\Article', 'a')
-                ->select('a')
+                ->leftJoin('a.authors', 'au')
+                ->select('a, au')
         ;
 
         if ($id !== null) {
             $qb->andWhere('a.id = :id')->setParameter('id', $id);
         }
 
-        $query = $qb->getQuery()
-                ->setHint(
-                        \Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
-                )
-                ->setHint(
-                        \Gedmo\Translatable\TranslatableListener::HINT_TRANSLATABLE_LOCALE, $this->container->get('request')->getLocale()
-                )
-                ->setHint(
-                \Gedmo\Translatable\TranslatableListener::HINT_FALLBACK, 1
-                )
-        ;
+        $query = $qb->getQuery();
 
         return $query;
     }

@@ -17,6 +17,10 @@ class Author
     use ORMBehaviors\Timestampable\Timestampable;
     use ORMBehaviors\SoftDeletable\SoftDeletable;
     
+    public function __toString() {
+        return strval($this->getFirstName() . ' ' . $this->getLastName());
+    }
+    
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

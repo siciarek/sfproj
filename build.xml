@@ -9,7 +9,13 @@
     <property name="doc.html.target.dir" value="web/doc"/>
     <property name="doc.pdf.target.dir" value="web/doc/pdf"/>
 
-    <target name="fix" depends="cc" description="Wprowadzenie danych domyślnych do bazy">
+    <target name="ge" description="Generowanie encji">
+        <exec executable="${php}">
+            <arg line="app/console doctrine:generate:entities ApplicationMainBundle --no-backup"/>
+        </exec>
+    </target>
+    
+    <target name="fix" description="Wprowadzenie danych domyślnych do bazy">
         <exec executable="${php}">
             <arg line="app/console doctrine:fixtures:load --no-interaction"/>
         </exec>

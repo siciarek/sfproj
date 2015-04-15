@@ -5,29 +5,23 @@ namespace Application\MainBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Translatable\Translatable;
 
 /**
  * Application\MainBundle\Entity\Article
  *
+ * @ORM\Entity
  * @ORM\Table(name="article")
  * @ORM\Entity(repositoryClass="Application\MainBundle\Entity\ArticleRepository")
- * @Gedmo\TranslationEntity(class="Application\MainBundle\Entity\ArticleTranslation")
  */
-class Article implements Translatable
+class Article
 {
+    use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Blameable\Blameable;
     use ORMBehaviors\Timestampable\Timestampable;
     use ORMBehaviors\SoftDeletable\SoftDeletable;
-    
-    /**
-     * @Gedmo\Locale
-     */
-    private $locale;
-    
-    public function setTranslatableLocale($locale)
-    {
-        $this->locale = $locale;
+        
+    public function __toString() {
+        return strval($this->getId());
     }
     
     /**
@@ -38,35 +32,10 @@ class Article implements Translatable
     private $id;
 
     /**
-     * @ORM\Column(name="title", type="string", length=255)
-     * @Gedmo\Translatable
-     */
-    private $title;
-
-    /**
-     * @ORM\Column(name="content", type="text")
-     * @Gedmo\Translatable
-     */
-    private $content;
-
-    /**
      * @ORM\ManyToMany(targetEntity="Author", mappedBy="articles", cascade={"persist"})
      */
     private $authors;
-
-    /**
-     * @ORM\OneToMany(targetEntity="ArticleTranslation", mappedBy="object", cascade={"persist"})
-     */
-    private $translations;
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
+    
     /**
      * Get id
      *
@@ -77,50 +46,13 @@ class Article implements Translatable
         return $this->id;
     }
 
+    
     /**
-     * Set title
-     *
-     * @param string $title
-     * @return Article
+     * Constructor
      */
-    public function setTitle($title)
+    public function __construct()
     {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string 
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set content
-     *
-     * @param string $content
-     * @return Article
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    /**
-     * Get content
-     *
-     * @return string 
-     */
-    public function getContent()
-    {
-        return $this->content;
+        $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -131,6 +63,7 @@ class Article implements Translatable
      */
     public function addAuthor(\Application\MainBundle\Entity\Author $authors)
     {
+        $authors->addArticle($this);
         $this->authors[] = $authors;
 
         return $this;
@@ -143,6 +76,7 @@ class Article implements Translatable
      */
     public function removeAuthor(\Application\MainBundle\Entity\Author $authors)
     {
+        $authors->removeArticle($this);
         $this->authors->removeElement($authors);
     }
 
@@ -154,38 +88,5 @@ class Article implements Translatable
     public function getAuthors()
     {
         return $this->authors;
-    }
-
-    /**
-     * Add translations
-     *
-     * @param \Application\MainBundle\Entity\ArticleTranslation $translations
-     * @return Article
-     */
-    public function addTranslation(\Application\MainBundle\Entity\ArticleTranslation $translations)
-    {
-        $this->translations[] = $translations;
-
-        return $this;
-    }
-
-    /**
-     * Remove translations
-     *
-     * @param \Application\MainBundle\Entity\ArticleTranslation $translations
-     */
-    public function removeTranslation(\Application\MainBundle\Entity\ArticleTranslation $translations)
-    {
-        $this->translations->removeElement($translations);
-    }
-
-    /**
-     * Get translations
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getTranslations()
-    {
-        return $this->translations;
     }
 }

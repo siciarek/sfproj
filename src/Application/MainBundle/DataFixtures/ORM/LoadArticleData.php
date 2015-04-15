@@ -60,8 +60,6 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
             $this->setReference('author' . $i, $obj);
         }
 
-        $repository = $manager->getRepository('Gedmo\\Translatable\\Entity\\Translation');
-
         foreach (range(1, $arcount) as $i) {
 
             $obj = new \Application\MainBundle\Entity\Article();
@@ -69,44 +67,23 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
             $obj->setCreatedBy($creator);
             $obj->setUpdatedBy($creator);
 
+            foreach (['pl', 'en'] as $tr) {
 
-            $title = $faker->sentence(4);
-            $title = preg_replace('/\.$/', '', $title);
-            $content = $faker->paragraphs(10);
-            $content = implode("\n\n", $content);
+                $title = $faker->sentence(4);
+                $title = preg_replace('/\.$/', '', $title);
+                $content = $faker->paragraphs(10);
+                $content = implode("\n\n", $content);
 
-            $obj->setTitle($title);
-            $obj->setContent($content);
+                $obj->translate($tr)->setTitle($title);
+                $obj->translate($tr)->setContent($content);
 
-            $manager->persist($obj);
-            $manager->flush();
-            $manager->clear();
+                $obj->mergeNewTranslations();
+            }
 
-            $title = $faker->sentence(4);
-            $title = preg_replace('/\.$/', '', $title);
-            $content = $faker->paragraphs(10);
-            $content = implode("\n\n", $content);
-            
-            $obj->setTranslatableLocale('en');
-            
-            $titleTrans =  new \Application\MainBundle\Entity\ArticleTranslation();
-            $titleTrans->setLocale('en');
-            $titleTrans->setField('title');
-            $titleTrans->setContent($title);
-            $titleTrans->setObject($obj);
-            $manager->persist($titleTrans);
-            
-            $contentTrans =  new \Application\MainBundle\Entity\ArticleTranslation();
-            $contentTrans->setLocale('en');
-            $contentTrans->setField('content');
-            $contentTrans->setContent($content);
-            $contentTrans->setObject($obj);
-            $manager->persist($contentTrans);
-            
             $au = [];
             foreach (range(1, rand(1, 3)) as $a) {
                 do {
-                    $a = rand(1, 100);
+                    $a = rand(1, $aucount);
                 } while (in_array($a, $au));
 
                 $au[] = $a;
@@ -118,7 +95,6 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
             }
 
             $manager->persist($obj);
-
             $manager->flush();
             $manager->clear();
         }

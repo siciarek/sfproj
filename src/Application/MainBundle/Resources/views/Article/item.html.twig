@@ -1,5 +1,10 @@
 {% extends '::base.html.twig' %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src=""></script>
+{% endblock %}
+
 {% block content %}
 
     {% set authors = [] %}
@@ -15,6 +20,12 @@
             <i class="fa fa-arrow-left fa-lg"></i>
         </a>
     </h1>
+
+    <form>
+        <textarea class="ckeditor">
+
+        </textarea>
+    </form>
 
     <div class="alert alert-info">
         <span>

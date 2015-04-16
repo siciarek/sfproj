@@ -40,8 +40,9 @@ class ArticleAdmin extends Admin {
                         ],
                         'content' => [
                             'label' => 'article.content',
+                            'field_type' => 'ckeditor',
                             'attr' => [
-                                'rows' => 16,
+                                
                             ]
                         ]
                     ]

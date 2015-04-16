@@ -1,10 +1,5 @@
 {% extends '::base.html.twig' %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script src=""></script>
-{% endblock %}
-
 {% block content %}
 
     {% set authors = [] %}
@@ -21,12 +16,6 @@
         </a>
     </h1>
 
-    <form>
-        <textarea class="ckeditor">
-
-        </textarea>
-    </form>
-
     <div class="alert alert-info">
         <span>
             <i class="fa fa-edit fa-lg"></i>
@@ -38,6 +27,6 @@
         </span>
     </div>
 
-    <pre style="white-space: pre-wrap">{{ item.translate(app.request.locale).content }}</pre>
+    <pre style="white-space: pre-wrap">{{ item.translate(app.request.locale).content|raw }}</pre>
 
 {% endblock %}

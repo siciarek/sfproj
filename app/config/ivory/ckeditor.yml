@@ -1,6 +1,8 @@
-parameters:
-    templating.engines: [ 'twig' ]
+# https://github.com/egeloen/IvoryCKEditorBundle
+# php ./app/console config:dump-reference IvoryCKEditorBundle
 
 ivory_ck_editor:
-    enable: true
-    autoload: false
+    default_config: standard
+    configs:
+        standard:
+            toolbar: standard

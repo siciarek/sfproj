@@ -33,7 +33,9 @@ class AuthorAdmin extends Admin
             ->with('article.author')
             ->add('firstName')
             ->add('lastName')
-            ->add('info')
+            ->add('info', 'ckeditor', [
+                'required' => false,
+            ])
             ->end();
 
     }

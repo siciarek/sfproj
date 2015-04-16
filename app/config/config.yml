@@ -3,7 +3,6 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     
-    - { resource: ivory/ckeditor.yml }
     - { resource: stof/doctrine-extensions.yml }
     - { resource: knplabs/doctrine-extensions.yml }
     - { resource: knplabs/paginator.yml }
@@ -17,6 +16,7 @@ imports:
     - { resource: a2lix/translation-form.yml }
     - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
 
+    - { resource: ivory/ckeditor.yml }
 
 framework:
     #esi:             ~
@@ -44,6 +44,9 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+#        resources: ['bootstrap_3_layout.html.twig']
+        resources: ['bootstrap_3_horizontal_layout.html.twig']
     globals:
         app_name: %app_name%
 

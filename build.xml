@@ -50,6 +50,7 @@
     <target name="cc" description="Czyszczenie katalogu cache">
         <delete includeemptydirs="true" verbose="true" >
             <fileset dir="app/cache" includes="**/*" excludes=".gitkeep"/>
+            <fileset dir="app/logs" includes="**/*" excludes=".gitkeep"/>
         </delete>
     </target>
 

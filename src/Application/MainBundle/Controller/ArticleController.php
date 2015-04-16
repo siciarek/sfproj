@@ -27,7 +27,7 @@ class ArticleController extends Controller {
         }
 
         $item = array_pop($items);
-
+        
         return [
             'item' => $item,
         ];

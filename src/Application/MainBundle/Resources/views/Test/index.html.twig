@@ -3,10 +3,10 @@
 {% block content %}
 
     <h1 class="page-header">
-        <i class="fa fa-globe text-muted"></i>
-        Test
+        <i class="fa fa-edit text-muted"></i>
+        {{ form.vars.data.id ? '#'~form.vars.data.id~' '~form.vars.data : ('author.add'|trans) }}
     </h1>
-
+    
     {{ form_start(form) }}
     {{ form_errors(form) }}
 

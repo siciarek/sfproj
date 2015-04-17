@@ -15,13 +15,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Article {
 
-    use ORMBehaviors\Translatable\Translatable;
-
-use ORMBehaviors\Blameable\Blameable;
-
-use ORMBehaviors\Timestampable\Timestampable;
-
-use ORMBehaviors\SoftDeletable\SoftDeletable;
+    use ORMBehaviors\Translatable\Translatable,
+        ORMBehaviors\Blameable\Blameable,
+        ORMBehaviors\Timestampable\Timestampable,
+        ORMBehaviors\SoftDeletable\SoftDeletable;
 
     public function __toString() {
         return $this->getTitle()? : '-';

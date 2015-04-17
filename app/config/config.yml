@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     
+    - { resource: egeloen/ckeditor.yml }
     - { resource: stof/doctrine-extensions.yml }
     - { resource: knplabs/doctrine-extensions.yml }
     - { resource: knplabs/paginator.yml }
@@ -15,8 +16,6 @@ imports:
     - { resource: sonata-project/media.yml }
     - { resource: a2lix/translation-form.yml }
     - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
-
-    - { resource: ivory/ckeditor.yml }
 
 framework:
     #esi:             ~

@@ -10,6 +10,9 @@ article:
     author: Autor
     authors: Autorzy
 
+author:
+    add: Dodaj autora
+
 user:
     signin: Zaloguj się
     signout: Wyloguj się

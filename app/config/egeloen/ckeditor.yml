@@ -1,0 +1,10 @@
+ivory_ck_editor:
+    default_config: standard
+    
+    configs:
+        standard:
+            contentsCss: /bundles/applicationmain/css/ckeditor.css
+            toolbar: standard
+
+# https://github.com/egeloen/IvoryCKEditorBundle
+# php ./app/console config:dump-reference IvoryCKEditorBundle

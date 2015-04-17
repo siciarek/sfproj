@@ -4,10 +4,12 @@ namespace Application\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Application\MainBundle\Entity\Article
  *
+ * @ORM\Entity
  * @ORM\Table(name="author")
  * @ORM\Entity(repositoryClass="Application\MainBundle\Entity\AuthorRepository")
  */
@@ -29,6 +31,12 @@ class Author
     private $id;
 
     /**
+     * @ORM\Column(name="slug", length=128)
+     * @Gedmo\Slug(fields={"firstName", "lastName"})
+     */
+    private $slug;
+    
+    /**
      * @ORM\Column(name="first_name")
      */
     private $firstName;
@@ -39,7 +47,7 @@ class Author
     private $lastName;
 
     /**
-     * @ORM\Column(name="date_of_birth", type="datetime", nullable=true)
+     * @ORM\Column(name="date_of_birth", type="datetime")
      */
     private $dateOfBirth;
 
@@ -193,5 +201,28 @@ class Author
     public function getDateOfBirth()
     {
         return $this->dateOfBirth;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Author
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

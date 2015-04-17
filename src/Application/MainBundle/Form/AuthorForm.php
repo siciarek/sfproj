@@ -14,7 +14,9 @@ class AuthorForm extends AbstractType
         $builder
             ->add('firstName')
             ->add('lastName')
-            ->add('dateOfBirth', 'date')
+            ->add('dateOfBirth', 'date', [
+                'years' => range(1900, date('Y'))
+            ])
             ->add('info', 'ckeditor')
             ->add('save', 'submit');
     }

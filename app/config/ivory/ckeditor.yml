@@ -1,8 +1,0 @@
-# https://github.com/egeloen/IvoryCKEditorBundle
-# php ./app/console config:dump-reference IvoryCKEditorBundle
-
-ivory_ck_editor:
-    default_config: standard
-    configs:
-        standard:
-            toolbar: standard

@@ -14,29 +14,27 @@ class TestController extends Controller {
 
     /**
      * @Route("", name="test.index")
-     * @Route("/author/{id}", name="test.edit")
+     * @Route("/author/{slug}", name="test.edit")
      * @Template()
      */
-    public function indexAction($id = null) {
+    public function indexAction($slug = null) {
 
         $request = $this->get('request');
         $em = $this->getDoctrine()->getManager();
 
         $author = new Author();
 
-        $id = intval($request->get('id', null));
-
-        if ($id > 0) {
-            $author = $em->getRepository('\Application\MainBundle\Entity\Author')->find($id);
+        if ($slug != null) {
+            $author = $em
+                    ->getRepository('\Application\MainBundle\Entity\Author')
+                    ->findOneBySlug($slug);
         }
 
         if (!$author instanceof Author) {
             throw $this->createNotFoundException();
         }
 
-        $type = new \Application\MainBundle\Form\AuthorForm();
-
-        $form = $this->createForm($type, $author);
+        $form = $this->createForm('applicationmain_author_form', $author);
 
         if ($request->getMethod() === 'POST') {
 
@@ -47,7 +45,7 @@ class TestController extends Controller {
                 $em->persist($author);
                 $em->flush();
 
-                return $this->redirectToRoute('test.edit', ['id' => $author->getId()]);
+                return $this->redirectToRoute('test.edit', ['slug' => $author->getSlug()]);
             }
         }
 

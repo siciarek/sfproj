@@ -1,9 +1,10 @@
 services:
-    form.type.translatable:
-      class: Application\MainBundle\Form\TranslatedFieldType
+    
+    form.type.author:
+      class: Application\MainBundle\Form\AuthorForm
       arguments: [ @service_container ]
       tags:
-       - { name: form.type, alias: translatable_field }
+       - { name: form.type, alias: applicationmain_author_form }
 
     locale.listener:
         class: Application\MainBundle\EventListener\LocaleListener

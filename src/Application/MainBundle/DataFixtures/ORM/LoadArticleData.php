@@ -20,8 +20,8 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager) {
-        $arcount = 100;
-        $aucount = 100;
+        $arcount = 30;
+        $aucount = 500;
 
         $faker = \Faker\Factory::create('pl_PL');
 
@@ -30,6 +30,9 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
         $authors = [];
 
         foreach (range(1, $aucount) as $i) {
+            
+            $dateOfBirth = $faker->dateTimeBetween($startDate = '-40 years', $endDate = '-22 years');
+            
             do {
                 $firstname = $faker->firstNameMale;
                 $lastname = $faker->lastNameMale;
@@ -48,14 +51,13 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
             $obj = new \Application\MainBundle\Entity\Author();
             $obj->setFirstName($firstname);
             $obj->setLastName($lastname);
+            $obj->setDateOfBirth($dateOfBirth);
             $obj->setInfo($info);
 
             $obj->setCreatedBy($creator);
             $obj->setUpdatedBy($creator);
 
             $manager->persist($obj);
-            $manager->flush();
-            $manager->clear();
 
             $this->setReference('author' . $i, $obj);
         }
@@ -96,7 +98,6 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
 
             $manager->persist($obj);
             $manager->flush();
-            $manager->clear();
             sleep(1);
         }
     }

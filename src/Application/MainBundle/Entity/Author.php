@@ -39,10 +39,14 @@ class Author
     private $lastName;
 
     /**
+     * @ORM\Column(name="date_of_birth", type="datetime", nullable=true)
+     */
+    private $dateOfBirth;
+
+    /**
      * @ORM\Column(name="info", type="text", nullable=true)
      */
     private $info;
-
 
     /**
      * @ORM\ManyToMany(targetEntity="Article", inversedBy="authors", cascade={"persist"})
@@ -166,5 +170,28 @@ class Author
     public function getArticles()
     {
         return $this->articles;
+    }
+
+    /**
+     * Set dateOfBirth
+     *
+     * @param \DateTime $dateOfBirth
+     * @return Author
+     */
+    public function setDateOfBirth($dateOfBirth)
+    {
+        $this->dateOfBirth = $dateOfBirth;
+
+        return $this;
+    }
+
+    /**
+     * Get dateOfBirth
+     *
+     * @return \DateTime 
+     */
+    public function getDateOfBirth()
+    {
+        return $this->dateOfBirth;
     }
 }

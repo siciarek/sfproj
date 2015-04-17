@@ -10,11 +10,15 @@ article:
     author: Author
     authors: Authors
 
+author:
+    add: Add new author
+
 user:
     signin: Sign in
     signout: Sign out
 
 common:
+    captcha: type the code from image above.
     home: Home
     info: Info
     contact: Contact
@@ -24,6 +28,8 @@ common:
     find_out_more: Find out more
     created_at: Created at
     list_is_empty: List is empty.
+    back_to_the_list: Back to the list
+    created_at: Created at
 
 menu:
     home: Home

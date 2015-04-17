@@ -4,6 +4,8 @@ imports:
     - { resource: services.yml }
     
     - { resource: egeloen/ckeditor.yml }
+    - { resource: gregwar/captcha.yml }
+    - { resource: vich/uploader.yml }
     - { resource: stof/doctrine-extensions.yml }
     - { resource: knplabs/doctrine-extensions.yml }
     - { resource: knplabs/paginator.yml }

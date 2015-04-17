@@ -1,6 +1,10 @@
 # Phrases
 Previous: Poprz.
 Next: Nast.
+First name: Imię
+Last name: Nazwisko
+Date of birth: Data urodzenia
+Save: Zapisz
 
 article:
     name: Artykuł
@@ -18,6 +22,7 @@ user:
     signout: Wyloguj się
 
 common:
+    captcha: wpisz kod z obrazka.
     home: Strona główna
     info: Info
     contact: Kontakt

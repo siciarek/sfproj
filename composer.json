@@ -17,32 +17,29 @@
         "behat/mink-extension": "dev-master",
         "behat/mink-browserkit-driver": "dev-master",
         "behat/mink-selenium2-driver": "dev-master",
-        
         "phpunit/phpunit": "3.7.*",
         "willdurand/faker-bundle": "@stable",
         "sensio/generator-bundle": "~2.3"
     },
     "require": {
+        "vich/uploader-bundle": "dev-master",
+        "gregwar/captcha-bundle": "dev-master",
         "egeloen/ckeditor-bundle": "~2.0",
         "stof/doctrine-extensions-bundle": "~1.1@dev",
         "a2lix/translation-form-bundle": "dev-master",
         "knplabs/knp-paginator-bundle": "dev-master",
-        
         "liuggio/excelbundle": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "doctrine/doctrine-migrations-bundle": "dev-master",
         "knplabs/doctrine-behaviors": "dev-master",
         "friendsofsymfony/jsrouting-bundle": "dev-master",
-        
         "doctrine/migrations": "~1.0@dev",
         "sonata-project/admin-bundle": "~2.4@dev",
         "sonata-project/datagrid-bundle": "~2.2@dev",
         "sonata-project/classification-bundle": "dev-master",
-        
         "sonata-project/doctrine-orm-admin-bundle": "dev-master",
         "sonata-project/user-bundle": "dev-master",
         "sonata-project/media-bundle": "dev-master",
-        
         "php": ">=5.3.3",
         "symfony/symfony": "2.6.*",
         "doctrine/orm": "~2.2,>=2.2.3,<2.5",

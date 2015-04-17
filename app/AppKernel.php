@@ -39,6 +39,9 @@ class AppKernel extends Kernel
             new Sonata\MediaBundle\SonataMediaBundle(),
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
             
+            new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
+            
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
             new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),

@@ -15,16 +15,17 @@ class AuthorAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+            ->addIdentifier('id')
             ->addIdentifier('firstName')
             ->addIdentifier('lastName')
             ->add('createdAt')
             ->add('updatedAt')
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'edit'   => array(),
-                    'delete' => array(),
-                ),
-            ));
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'edit'   => [],
+                    'delete' => [],
+                ],
+            ]);
     }
 
     protected function configureFormFields(FormMapper $formMapper)

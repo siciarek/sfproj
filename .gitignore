@@ -6,6 +6,7 @@
 /properties.cnf
 /composer.lock
 
+/app/SymfonyRequirements.php
 /app/bootstrap.php.cache
 /app/cache/*
 !app/cache/.gitkeep

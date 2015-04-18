@@ -22,6 +22,9 @@
         "sensio/generator-bundle": "~2.3"
     },
     "require": {
+        "siciarek/jstrans-bundle": "dev-master",
+        "excelwebzone/text-bundle": "dev-master",
+
         "vich/uploader-bundle": "dev-master",
         "gregwar/captcha-bundle": "dev-master",
         "egeloen/ckeditor-bundle": "~2.0",
@@ -31,6 +34,7 @@
         "liuggio/excelbundle": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "doctrine/doctrine-migrations-bundle": "dev-master",
+        "knplabs/knp-snappy-bundle": "dev-master",
         "knplabs/doctrine-behaviors": "dev-master",
         "friendsofsymfony/jsrouting-bundle": "dev-master",
         "doctrine/migrations": "~1.0@dev",
@@ -40,6 +44,7 @@
         "sonata-project/doctrine-orm-admin-bundle": "dev-master",
         "sonata-project/user-bundle": "dev-master",
         "sonata-project/media-bundle": "dev-master",
+        "sonata-project/seo-bundle": "dev-master",
         "php": ">=5.3.3",
         "symfony/symfony": "2.6.*",
         "doctrine/orm": "~2.2,>=2.2.3,<2.5",

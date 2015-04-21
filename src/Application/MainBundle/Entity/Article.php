@@ -11,7 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Entity
  * @ORM\Table(name="article")
- * @ORM\Entity(repositoryClass="Application\MainBundle\Entity\ArticleRepository")
+ * @ORM\Entity(repositoryClass="ArticleRepository")
  */
 class Article {
 

@@ -27,14 +27,26 @@ class GoCommand extends ContainerAwareCommand {
         $root = $em->getRepository('ApplicationMainBundle:Competitor')->getTree();
         $nodes = $em->getRepository('ApplicationMainBundle:Competitor')->findAll();
 
-        echo 'digraph {' . PHP_EOL;
+        ob_start();
+        
+        echo <<<HEAD
+digraph {
+    graph [ bgcolor=transparent ]
+    node  [ style=filled, fillcolor=yellow ]
+HEAD;
+     
         $this->displayNode($root);
 
         foreach ($nodes as $n) {
             printf('%s [label="%s"]' . PHP_EOL, $n->getId(), $n->getName());
         }
-
         echo '}' . PHP_EOL;
+        
+        $def = ob_get_clean();
+        
+        $content = $this->getContainer()->get('app.service.display.graph')->getImageContent($def);
+        
+        file_put_contents(__DIR__.'/../../../../temp/graph.png', $content);
     }
 
     public function displayNode($node) {

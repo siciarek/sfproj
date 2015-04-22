@@ -59,22 +59,23 @@ digraph {
 }
 GRAPH;
 
+//        $input = escapeshellarg($graph);
+//
+//        $dot = '/usr/bin/dot';
+//
+//        $cmd = "echo $input | $dot -T$format";
+//
+//        $process = new Process($cmd);
+//        $process->run();
+//
+//        if (!$process->isSuccessful()) {
+//            throw new \RuntimeException($process->getErrorOutput());
+//        }
+//
+//        $content = $process->getOutput();
 
-        $input = escapeshellarg($graph);
-
-        $dot = '/usr/bin/dot';
-
-        $cmd = "echo $input | $dot -T$format";
-
-        $process = new Process($cmd);
-        $process->run();
-
-        if (!$process->isSuccessful()) {
-            throw new \RuntimeException($process->getErrorOutput());
-        }
-
-        $content = $process->getOutput();
-
+        $content = $this->get('app.service.display.graph')->getImageContent($graph);
+        
         $finfo = new \finfo(FILEINFO_MIME_TYPE);
         $contentType = $finfo->buffer($content);
 

@@ -1,4 +1,7 @@
 services:
+    app.service.display.graph:
+        class: Application\MainBundle\Service\DisplayGraph
+        arguments: [ @service_container ]
     
     form.type.author:
       class: Application\MainBundle\Form\AuthorForm

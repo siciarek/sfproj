@@ -24,50 +24,6 @@ class GoCommand extends ContainerAwareCommand {
     protected function execute(InputInterface $input, OutputInterface $output) {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
-        $count = 48;
-
-        $root = new Competitor();
-        $root->setId(0);
-        $root->setName('Czesław Olak');
-
-        $nodes = [$root];
-
-        $range = range(1, $count);
-
-        $generate = $input->getArgument('gen');
-        
-        $faker = \Faker\Factory::create('pl_PL');
- 
-
-        if ($generate) {
-            $em->persist($root);
-            $em->flush();
-
-            foreach ($range as $i) {
-                
-                $firstname = $faker->firstNameMale;
-                $lastname = $faker->lastNameMale;
-                $gender = \Sonata\UserBundle\Model\UserInterface::GENDER_MALE;
-
-                if (rand(0, 1)) {
-                    $firstname = $faker->firstNameFemale;
-                    $lastname = $faker->lastNameFemale;
-                    $gender = \Sonata\UserBundle\Model\UserInterface::GENDER_FEMALE;
-                }
-                                
-                $r = new Competitor();
-                $r->setName($firstname . ' ' . $lastname);
-                $r->setId($i);
-
-                $r->setChildNodeOf($nodes[array_rand($nodes)]);
-
-                $em->persist($r);
-                $em->flush();
-
-                $nodes[] = $r;
-            }
-        }
-
         $root = $em->getRepository('ApplicationMainBundle:Competitor')->getTree();
         $nodes = $em->getRepository('ApplicationMainBundle:Competitor')->findAll();
 

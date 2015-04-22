@@ -2,15 +2,11 @@
 
 namespace Application\MainBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Application\MainBundle\DataFixtures\BasicFixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface, FixtureInterface, ContainerAwareInterface {
-
+class LoadArticleData extends BasicFixture {
+    
     /**
      * @var numeric 
      */
@@ -101,28 +97,4 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
             sleep(1);
         }
     }
-
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder() {
-        return $this->order;
-    }
-
-    public function getContainer() {
-        return $this->container;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setContainer(ContainerInterface $container = null) {
-        $this->container = $container;
-    }
-
 }

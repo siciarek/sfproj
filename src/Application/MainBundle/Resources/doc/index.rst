@@ -19,4 +19,5 @@ Spis treści
     :titlesonly:
 
     references/setup
+    references/math
     

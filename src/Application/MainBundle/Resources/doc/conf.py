@@ -13,6 +13,7 @@ release = version
 language = 'polish'
 templates_path = ['_templates']
 exclude_patterns = ['_build']
+html_static_path = ['_static']
 master_doc = 'index'
 html_theme = 'nature'
 html_sidebars = {'**': ['localtoc.html', 'relations.html']}
@@ -73,7 +74,8 @@ from pygments.lexers.web import PhpLexer
 
 # ...
 # add the extensions to the list of extensions
-extensions = ['sensio.sphinx.refinclude', 'sensio.sphinx.configurationblock', 'sensio.sphinx.phpcode']
+extensions = ['sensio.sphinx.refinclude', 'sensio.sphinx.configurationblock', 'sensio.sphinx.phpcode', 'sphinx.ext.pngmath' ]
+exclude_patterns = [ 'references/includes' ]
 
 # enable highlighting for PHP code not between ``<?php ... ?>`` by default
 lexers['php'] = PhpLexer(startinline=True)

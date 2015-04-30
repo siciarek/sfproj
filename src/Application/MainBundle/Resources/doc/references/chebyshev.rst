@@ -1,6 +1,31 @@
 Implementacja funkcji :math:`sin(x)` przy pomocy `Interpolacji Czebyszewa`
 --------------------------------------------------------------------------
 
+.. code-block:: json
+    
+    [
+        [0.000000000000, 0.000000000000  ],
+        [0.330693963536, 0.324699469205  ],
+        [0.661387927072, 0.614212712690  ],
+        [0.992081890607, 0.837166478263  ],
+        [1.322775854143, 0.969400265939  ],
+        [1.653469817679, 0.996584493007  ],
+        [1.984163781215, 0.915773326655  ],
+        [2.314857744750, 0.735723910673  ],
+        [2.645551708286, 0.475947393037  ],
+        [2.976245671822, 0.164594590281  ],
+        [3.306939635358, -0.164594590281 ], 
+        [3.637633598893, -0.475947393037 ], 
+        [3.968327562429, -0.735723910673 ], 
+        [4.299021525965, -0.915773326655 ], 
+        [4.629715489501, -0.996584493007 ], 
+        [4.960409453037, -0.969400265939 ], 
+        [5.291103416572, -0.837166478263 ], 
+        [5.621797380108, -0.614212712690 ], 
+        [5.952491343644, -0.324699469205 ], 
+        [6.283185307180, -0.000000000000 ]
+    ]
+
 .. code-block:: c
 
     int x[] = {
@@ -109,10 +134,18 @@ wartość z przedziału :math:`[-1, 1]`.
 
 .. code-block:: c
 
+    /**
+     * Granice interpolowanego przedziału
+     */
+    double range[] = {0.000000000000, 6.283185307180};
+
+    /**
+     * Funkcja przeliczająca wartość z przedziału [a, b] na odpowiednią
+     * wartość z przedziału [-1, 1]
+     */
     double norm(double x, double a, double b) {
         return (x - 0.5 * (a + b)) * (2 / (b - a));
     }
-
 
 Funkcje bazowe (tzw. `bazę Czebyszewa`) stanowi zbiór wielomianów określonych wzorem rekurencyjnym:
 
@@ -127,7 +160,12 @@ Funkcje bazowe (tzw. `bazę Czebyszewa`) stanowi zbiór wielomianów określonyc
 
 .. code-block:: c
 
+    /**
+     * Wielomian bazy Czebyszewa
+     */
     double T(unsigned int k, double x) {
+
+        x = norm(x, range[0], range[1]);
 
         switch(k) {
             case 0:
@@ -157,10 +195,6 @@ Poniżej 10 pierwszych wielomianów z `bazy Czebyszewa`:
         T_9(x) & = & 256x^9 - 576x^7 + 432x^5 - 120x^3 + 9x
     \end{eqnarray}
 
-.. code-block:: c
-
-
-
 Wielomian interpolacyjny Czebyszewa ma postać:
 
 .. math::
@@ -170,6 +204,23 @@ Wielomian interpolacyjny Czebyszewa ma postać:
 .. math::
 
     W(x) = \sum_{k = 0}^{k = n} a_{k}T_{k}(x) 
+
+
+.. code-block:: c
+    
+    /**
+     * Wielomian interpolacyjny Czebyszewa
+     */
+    double W(double x, double a[]) {
+        int k = 0;
+        double sum = 0.0;
+
+        for(k = 0; k < (sizeof(a) / sizeof(double)); k++) {
+            sum += a[k] * T(k, x);
+        }
+
+        return sum;
+    }
 
 Wektor :math:`[ a_{0}, a_{1}, \cdots, a_{n} ]` wyliczymy z poniższego wzoru:
 
@@ -221,4 +272,6 @@ Powyższe działania można przeprowadzić na kartce, lub przy pomocy aplikacji
 wspierającej działanie na macierzach (`Matlab`, `R`), ponieważ musimy je wykonać
 tylko raz dla danej funkcji, w samej aplikacji będziemy się posługiwać tylko
 lista wartości.
+
+Po wyliczeniu wartości wektora :math:`a` wynoszą:
 

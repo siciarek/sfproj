@@ -24,13 +24,13 @@
     <target name="doc" depends="doc-html, doc-pdf" description="Generowanie dokumentacji projektu"/>
 
     <target name="doc-html" description="Generowanie dokumentacji projektu w formacie HTML">
-        <exec executable="sphinx-build">
+        <exec executable="${sphinx.build}">
             <arg line="-E -a -b html ${doc.source.dir} ${doc.html.target.dir}"/>
         </exec>
     </target>
 
     <target name="doc-pdf" description="Generowanie dokumentacji projektu w formacie PDF">
-        <exec executable="sphinx-build">
+        <exec executable="${sphinx.build}">
             <arg line="-E -a -b latex ${doc.source.dir} ${doc.pdf.target.dir}"/>
         </exec>
         <exec executable="make" dir="${doc.pdf.target.dir}"/>

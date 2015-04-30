@@ -1,9 +1,10 @@
 .idea
 
+*.pyc
 /temp*
 /behat.yml
 /web/uploads
-/properties.cnf
+/properties.conf
 /composer.lock
 
 /app/SymfonyRequirements.php

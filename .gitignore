@@ -1,5 +1,7 @@
 .idea
 
+
+/src/Application/MainBundle/Resources/doc/code/*/app
 *.pyc
 /temp*
 /behat.yml

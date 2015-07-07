@@ -22,6 +22,8 @@
         "sensio/generator-bundle": "~2.3"
     },
     "require": {
+        "hwi/oauth-bundle": "0.3.*@dev",
+
         "siciarek/jstrans-bundle": "dev-master",
         "excelwebzone/text-bundle": "dev-master",
 

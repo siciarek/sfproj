@@ -1,31 +1,47 @@
 <?php
 
 define('GNUPLOT', 'gnuplot');
+define('SAMPLING', 512);
 define('M_2PI', 2 * M_PI);
 
-function generateSamples(&$t, $freq, $sampling = 256, $duration = 3) {
+$count = 5;
+$delay = -1;
+$frequencies = [];
+
+$max = 48;
+
+while(count($frequencies) < $count) {
+	$r = rand(1, $max);
+	if(in_array($r, $frequencies)) {
+		continue;
+	}
+	$frequencies[] = $r;
+}
+
+$frequencies = range(1, 17);
+
+sort($frequencies);
+
+function generateSamples($freq, $duration = 1) {
    
-    $parts =  $sampling / $freq;
-    $chunk = M_2PI / $parts;
+    $parts =  SAMPLING / $freq;
+    $chunk = M_2PI / $parts;    
+	$samples = [];
+	
+	for($s = 0; $s < $duration; $s++) {
+		for($v = 0; $v < $freq * M_2PI; $v+= $chunk) {
+			$samples[] = number_format(sin($v), 12);
+		}
+	}
 
-    $i = count($t);
-    
-    $t[$i] = [];
-
-    foreach (range(0, $freq * M_2PI, $chunk) as $v) {
-        $t[$i][] = number_format(sin($v), 12);
-    }
-    
-    return $t; 
+	return $samples;
 }
 
 $time = [];
-$time = generateSamples($time, 1);
-$time = generateSamples($time, 2);
-$time = generateSamples($time, 4);
-$time = generateSamples($time, 7);
-$time = generateSamples($time, 8);
 
+foreach($frequencies as $f) {
+	$time[] = generateSamples($f);
+}
 
 $x = [];
 
@@ -33,7 +49,7 @@ for ($i = 0; $i < count($time[0]); $i++) {
     $sample = 0;
 
     foreach ($time as $key) {
-        $sample += $key[$i];
+        $sample = $sample + $key[$i];
     }
 
     $x[] = $sample;
@@ -44,6 +60,7 @@ $m = 0;
 $j = 1;
 
 $X = [];
+
 for ($m = 0; $m < $N; $m++) {
     $sum = 0;
 
@@ -61,22 +78,29 @@ unlink('frequency.dat');
 file_put_contents('time.dat', implode("\n", $x));
 file_put_contents('frequency.dat', implode("\n", $X));
 
-$xmax = 9;
+$xmax = intval($N / 2);
+$xmax = end($frequencies) + 1;
+
+$title = json_encode($frequencies);
 
 $plot = <<<PLOT
 set multiplot
 
+set title "$title"
 set size 1, 0.5
 set origin 0, 0.5
-plot "time.dat" notitle with points
+#set xrange [0:20]
+plot "time.dat" notitle with lines
 
+unset title
+set xtics 2
 set size 1, 0.5
 set origin 0, 0
 set xrange [0:$xmax]
 plot "frequency.dat" notitle with impulses 
 
 unset multiplot
-pause(3)
+pause($delay)
 PLOT;
 
 file_put_contents('temp.gpl', $plot);

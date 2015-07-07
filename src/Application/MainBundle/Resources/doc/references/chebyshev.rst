@@ -225,6 +225,8 @@ Wielomian interpolacyjny Czebyszewa ma postać:
     
     W(x) = a_{0}T_{0}(x) + a_{1}T_{1}(x) + \cdots + a_{n}T_{n}(x)
 
+Co można zapisać w postaci sumy:
+
 .. math::
 
     W(x) = \sum_{k = 0}^{k = n} a_{k}T_{k}(x) 

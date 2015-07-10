@@ -1,7 +1,6 @@
 <?php
 
-$filename = __DIR__ . DIRECTORY_SEPARATOR . 'cballs.png';
-$trgfilename = __DIR__ . DIRECTORY_SEPARATOR . 'xcballs.png';
+$filename = __DIR__ . DIRECTORY_SEPARATOR . 'source.png';
 
 function getInfo($filename) {
     $info = getimagesize($filename);
@@ -84,10 +83,6 @@ function grayScale($pixels, $info, $algorithm = 'luminosity', $shades = 32) {
                 $gray = intval(($avg / $factor) + 0.5) * $factor;
                 break;
             
-            case 'lightness':
-                $gray = (max([$R, $G, $B]) + min([$R, $G, $B])) / 2;
-                break;
-            
             case 'max':
                 $gray = max([$R, $G, $B]);
                 break;
@@ -108,6 +103,9 @@ function grayScale($pixels, $info, $algorithm = 'luminosity', $shades = 32) {
                 $gray = $B;
                 break;
             
+            case 'lightness':
+                $gray = (max([$R, $G, $B]) + min([$R, $G, $B])) / 2;
+                break;
             case 'luma':
                 $gray = array_sum([0.299 * $R, 0.587 * $G, 0.114 * $B]);
                 break;

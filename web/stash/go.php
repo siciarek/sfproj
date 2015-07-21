@@ -1,5 +1,12 @@
 <?php
 
+/*
+
+  http://www.imageprocessingplace.com/root_files_V3/image_databases.htm
+  http://lodev.org/cgtutor/filtering.html
+ */
+
+
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'imglib.php';
 
 /**
@@ -9,9 +16,9 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'imglib.php';
  * @param type $pixels
  * @param type $info
  * @param type $r
- * @return type
+ * @return array
  */
-function gaussianBlur($pixels, $info, $r = 4) {
+function gaussianBlur($pixels, $info, $r = 3) {
     $result = [];
 
     $channels = [];
@@ -36,7 +43,7 @@ function gaussianBlur($pixels, $info, $r = 4) {
 
     $w = $info['width'];
     $h = $info['height'];
-    
+
     /**
      * Operację wykonujemy osobno dla każdego kanału
      */
@@ -45,55 +52,52 @@ function gaussianBlur($pixels, $info, $r = 4) {
         $tcl = [];
 
         $rs = ceil($r * 2.57);
-         
-        foreach($channels as $c) {
+
+        foreach ($channels as $c) {
             $scl[] = $c[$ch];
         }
-        
+
         echo PHP_EOL;
         var_dump($ch);
-        
-        
+
         // Algorytm przetwarzania kanału:
         for ($i = 0; $i < $h; $i++) {
-            echo '.';
-            
-            if($i > 0 and $i % 60 === 0) {
-                echo ' ' . $i . PHP_EOL;
-            }
-            
             for ($j = 0; $j < $w; $j++) {
+
+                echo '.';
                 
                 $val = 0;
                 $wsum = 0;
-                
+
                 // Przelicza wszystkie wartości znajdujące się w oknie:
                 for ($iy = $i - $rs; $iy < $i + $rs + 1; $iy++) {
                     for ($ix = $j - $rs; $ix < $j + $rs + 1; $ix++) {
-                    
+
                         // Pomija wartości ujemne
                         $x = min($w - 1, max(0, $ix));
                         $y = min($h - 1, max(0, $iy));
-                        
+
+                        // Właściwy wzór na rozmycie
                         $dsq = pow(($ix - $j), 2) + pow(($iy - $i), 2);
-                        $wght = exp(-$dsq / (2 * pow($r, 2))) / (2 * M_PI *  pow($r, 2));
-                        
+                        $wght = exp(-$dsq / (2 * pow($r, 2))) / (2 * M_PI * pow($r, 2));
+
                         $val += $scl[$y * $w + $x] * $wght;
                         $wsum += $wght;
                     }
                 }
-                
+
                 $tcl[$i * $w + $j] = round($val / $wsum);
             }
         }
-        
-        for($i = 0; $i < count($tcl); $i++) {
+
+        for ($i = 0; $i < count($tcl); $i++) {
             $temp[$i][] = $tcl[$i];
         }
     }
-  
+
     foreach ($temp as $RGB) {
-        $result[] = imagecolorallocate($img, $RGB[0], $RGB[1], $RGB[2]);
+        list($R, $G, $B) = $RGB;
+        $result[] = imagecolorallocate($img, $R, $G, $B);
     }
 
     imagedestroy($img);
@@ -108,7 +112,7 @@ function gaussianBlur($pixels, $info, $r = 4) {
  * @param type $info
  * @param type $algorithm
  * @param type $shades
- * @return type
+ * @return array
  */
 function grayScale($pixels, $info, $algorithm = 'luminosity', $shades = 32) {
 
@@ -175,17 +179,20 @@ function grayScale($pixels, $info, $algorithm = 'luminosity', $shades = 32) {
     return $result;
 }
 
-$filename = __DIR__ . DIRECTORY_SEPARATOR . 'square.png';
+$filename = __DIR__ . DIRECTORY_SEPARATOR . 'peppers_color.png';
 $info = getInfo($filename);
+
 $pixels = getPixels($filename);
 
-//foreach ([
-//'lightness', 'min', 'max', 'average', 'luma', 'luminosity', 'dummy', 'red', 'green', 'blue', 'shades'] as $algorithm) {
+//$algorithms = ['lightness', 'min', 'max', 'average', 'luma', 'luminosity', 'dummy', 'red', 'green', 'blue', 'shades'];
+//
+//foreach ($algorithms as $algorithm) {
 //    var_dump($algorithm);
 //    $result = grayScale($pixels, $info, $algorithm);
 //    saveAs($algorithm . '.png', $result, $info);
 //}
-
+//
+//exit;
 
 $result = gaussianBlur($pixels, $info, 3);
 saveAs('blurred.png', $result, $info);

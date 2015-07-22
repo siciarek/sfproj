@@ -1,0 +1,39 @@
+<html>
+    <head>
+
+    </head>
+
+    <body>
+
+        <h1>Tone generator</h1>
+
+        <script>
+                        var context = new window.AudioContext();
+                        var oscillator;
+
+                        function play(freq) {
+
+                            oscillator = context.createOscillator();
+
+                            var gainNode = context.createGain();
+                            oscillator.connect(gainNode);
+                            gainNode.connect(context.destination);
+                            gainNode.gain.value = 1.0;
+
+                            oscillator.frequency.value = freq;
+                            oscillator.type = 'sawtooth'; // 'sawtooth'; // 'triangle'; // 'sine'; // square';
+
+                            oscillator.start(0);
+                        }
+
+                        play(0);
+
+                        setInterval(function () {
+                            oscillator.frequency.value += 8;
+                            oscillator.frequency.value %= (440 + 300)
+                        }, 10);
+        </script>
+
+
+    </body>
+</html>

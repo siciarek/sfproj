@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>HTML5 JavaScript Piano - with Data URIs</title>
+        <meta name="description" content="A synth piano synth that generates all of its audio files dynamically using JavaScript and data URIs. Choose from a variety of sounds styles and play with the looper, visual waveforms, and more.">
+        <link rel="stylesheet" type="text/css" href="/piano/ref/piano.css">
+        <meta property="og:image" content="http://mrcoles.com/media/img/piano-visual-mode.png">
+        <link rel="image_src" href="http://mrcoles.com/media/img/piano-visual-mode.png">
+    </head>
+    <body><canvas height="500" width="782" style="position: absolute; top: 339px; left: 50%; margin-left: -391px; width: 782px; height: 500px;"></canvas>
+        <div id="content">
+            <div id="content-inner">
+                <div id="piano">
+                    <h1>Javascript Piano</h1>
+                    <div class="help" tabindex="1">
+                        <div class="help-inner">
+                            <div id="synth-settings"><div class="opts"><p><strong>Volume:</strong></p><p><a class="" href="#">Flat</a></p><p><a class="selected" href="#">Linear Fade</a></p><p><a class="" href="#">Quadratic Fade</a></p></div><div class="opts"><p><strong>Style:</strong></p><p><a class="selected" href="#">Wave</a></p><p><a class="" href="#">Square Wave</a></p><p><a class="" href="#">Triangle Wave</a></p><p><a class="" href="#">Sawtooth Wave</a></p></div></div>
+                            <div class="opts">
+                                <p><strong>Controls:</strong></p>
+                                <p>play using home row &amp; above &nbsp; /</p>
+                                <p>change playable keys: “,” &amp; “.” &nbsp; /</p>
+                                <p>shift keyboard: ← &amp; → <span id="shift"></span></p>
+                            </div>
+                            <div class="opts">
+                                <p><strong>Extras:</strong></p>
+                                <p class="toggle-color toggle hold">Color - c &nbsp; /</p>
+                                <p class="toggle-demo toggle">Demo - m &nbsp; /</p>
+                                <p class="toggle-animate toggle">Visual mode - 8 &nbsp; /</p>
+                                <p class="toggle-looper">Looper - 9 &nbsp; /</p>
+                                <p>Help - 0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="loop" tabindex="2">loop</div>
+                <div class="keys"><div data-key="-12" class="key"></div><div data-key="-11" class="key black black1"></div><div data-key="-10" class="key"></div><div data-key="-9" class="key black black3"></div><div data-key="-8" class="key"></div><div data-key="-7" class="key"></div><div data-key="-6" class="key black black1"></div><div data-key="-5" class="key"></div><div data-key="-4" class="key black black2"></div><div data-key="-3" class="key"></div><div data-key="-2" class="key black black3"></div><div data-key="-1" class="key"></div><div data-key="0" class="key"></div><div data-key="1" class="key black black1"></div><div data-key="2" class="key"></div><div data-key="3" class="key black black3"></div><div data-key="4" class="key"></div><div data-key="5" class="key"></div><div data-key="6" class="key black black1"></div><div data-key="7" class="key"></div><div data-key="8" class="key black black2"></div><div data-key="9" class="key"></div><div data-key="10" class="key black black3"></div><div data-key="11" class="key"></div><div data-key="12" class="key"></div><div data-key="13" class="key black black1"></div></div><canvas height="20" width="20" style="position: absolute; top: 26px; right: 116px; width: 20px; height: 20px; cursor: pointer;"></canvas></div>
+            </div>
+        </div>
+        <div id="below">
+            <p id="info">info</p>
+            <p id="top">↑</p>
+            <div id="below-inner">
+                <h2>HTML5 Javascript Piano</h2>
+                <p>This synth piano is written <em>solely</em> using 
+HTML, JS, and CSS. It contains a small handful of synths with 
+configurable decays, a looper, demo mode, visual mode, and a variety of 
+colors. View controls by hitting the top-right button on the piano.</p>
+                <p>
+                    It doesn't use a single static audio file, instead 
+it generates them on the fly at the byte level and then converts them to
+ files using the data URI schema. On a similar note, it doesn't use a 
+single image either, just CSS.
+                    You can make pretty much any kind of file with a 
+data URI, such as a
+                    <a href="http://mrcoles.com/low-res-paint/">bitmap file</a> or a
+                    <a href="http://mrcoles.com/favicon-generator/">favicon</a>.
+                </p>
+                <p><span title="May 16, 2012">Currently</span> iOS doesn’t support HTML5 audio well enough in the browser to make this work. So, no go on iPhone and iPad, for now.</p>
+                <p>Various people have been experimenting with audio files and data URIs for a while now. I first came across <a href="http://www.sk89q.com/playground/jswav/">this implementation</a>
+ by sk89q, which was helpful in getting my audio files to work. For 
+future projects, I will probably use an audio api, but currently it’s 
+just <a href="http://caniuse.com/audio-api">firefox &amp; chrome</a>. For further reading, here is a good overview of <a href="http://matt.west.co.tt/music/jasmid-midi-synthesis-with-javascript-and-html5-audio/">the state of HTML5 audio</a> from December 2010.</p>
+                <p>
+                    By <a href="http://mrcoles.com/">Peter Coles</a>
+                    / <a href="http://twitter.com/lethys">@lethys</a>
+                    – May 16, 2012
+                </p>
+            </div>
+            <iframe style="position: static; visibility: visible; width: 86px; height: 20px;" data-twttr-rendered="true" title="Twitter Tweet Button" class="twitter-share-button twitter-tweet-button twitter-share-button twitter-count-horizontal" src="/piano/ref/tweet_button.html" allowtransparency="true" scrolling="no" id="twitter-widget-0" frameborder="0"></iframe>
+        </div>
+        <script src="/piano/ref/jquery-1.js"></script>
+        <script src="/piano/ref/audio.js"></script>
+        <script src="/piano/ref/piano.js"></script>
+
+</body></html>

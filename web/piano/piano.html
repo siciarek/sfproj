@@ -236,6 +236,11 @@
                     seconds: 3
                 });
 
+                audio = Notes.getDataURI(2);
+                $(new Audio(audio)).attr('autoplay', true);
+                audio = Notes.getDataURI(6);
+                $(new Audio(audio)).attr('autoplay', true);
+                audio = Notes.getDataURI(9);
                 $(new Audio(audio)).attr('autoplay', true);
 
             })();
